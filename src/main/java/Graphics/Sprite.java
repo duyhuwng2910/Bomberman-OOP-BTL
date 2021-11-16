@@ -61,7 +61,7 @@ public class Sprite {
     | Character
     |--------------------------------------------------------------------------
      */
-    //BALLOM
+    //BALLOOM
     public static Sprite balloom_left1 = new Sprite(DEFAULT_SIZE, 9, 0, SpriteSheet.tiles, 16, 16);
     public static Sprite balloom_left2 = new Sprite(DEFAULT_SIZE, 9, 1, SpriteSheet.tiles, 16, 16);
     public static Sprite balloom_left3 = new Sprite(DEFAULT_SIZE, 9, 2, SpriteSheet.tiles, 16, 16);
@@ -266,10 +266,7 @@ public class Sprite {
         final int H = (int) input.getHeight();
         final int S = scaleFactor;
 
-        WritableImage output = new WritableImage(
-                W * S,
-                H * S
-        );
+        WritableImage output = new WritableImage(W * S,H * S);
 
         PixelReader reader = input.getPixelReader();
         PixelWriter writer = output.getPixelWriter();

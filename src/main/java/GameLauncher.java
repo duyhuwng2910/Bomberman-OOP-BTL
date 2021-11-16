@@ -1,26 +1,22 @@
 package main.java;
 
 import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import main.java.Entities.Bomber;
-import main.java.Entities.Entity;
+import main.java.Entities.Entities;
 import main.java.Entities.Grass;
 import main.java.Entities.Wall;
 import main.java.Graphics.Sprite;
-
-import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import main.java.Input.Keyboard;
 
 public class GameLauncher extends Application {
 
@@ -29,11 +25,8 @@ public class GameLauncher extends Application {
 
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entity> entities = new ArrayList<>();
-    private List<Entity> stillObjects = new ArrayList<>();
-
-    /*private boolean isLeftKeyPressed;
-    private boolean isRightKeyPressed;*/
+    private List<Entities> entities = new ArrayList<>();
+    private List<Entities> stillObjects = new ArrayList<>();
 
     public static void main(String[] args) {
         Application.launch(GameLauncher.class);
@@ -51,11 +44,36 @@ public class GameLauncher extends Application {
 
         // Tao scene
         Scene scene = new Scene(root);
-
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch (keyEvent.getCode()) {
+                    case UP:
+                        System.out.println("UP");
+                        break;
+                    case LEFT:
+                        System.out.println("LEFT");
+                        break;
+                    case DOWN:
+                        System.out.println("DOWN");
+                        break;
+                    case RIGHT:
+                        System.out.println("RIGHT");
+                        break;
+                    case SPACE:
+                        System.out.println("JUMP");
+                        break;
+                    default:
+                        System.out.println("Another");
+                        break;
+                }
+            }
+        });
         // Them scene vao stage
         stage.setScene(scene);
         stage.show();
 
+        Keyboard keyboard = new Keyboard(scene);
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
@@ -63,35 +81,22 @@ public class GameLauncher extends Application {
                 update();
             }
         };
+
         timer.start();
 
         createMap();
 
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
+        Entities bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage(), keyboard);
         entities.add(bomberman);
-
-        /*private void createKeyListeners() {
-            scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-                @Override
-                public void handle(KeyEvent event) {
-                    if (event.getCode() == KeyCode.LEFT) {
-                        isLeftKeyPressed = true;
-
-                    } else if (event.getCode() == KeyCode.RIGHT) {
-                        isRightKeyPressed = true;
-                    }
-
-                }
-            });
-        }*/
+        bomberman.update();
 
     }
 
+    // hàm tạo map
     public void createMap() {
         for (int i = 0; i < WIDTH; i++) {
             for (int j = 0; j < HEIGHT; j++) {
-                Entity object;
+                Entities object;
                 if (j == 0 || j == HEIGHT - 1 || i == 0 || i == WIDTH - 1) {
                     object = new Wall(i, j, Sprite.wall.getFxImage());
                 }
@@ -104,7 +109,7 @@ public class GameLauncher extends Application {
     }
 
     public void update() {
-        entities.forEach(Entity::update);
+        entities.forEach(Entities::update);
     }
 
     public void render() {
