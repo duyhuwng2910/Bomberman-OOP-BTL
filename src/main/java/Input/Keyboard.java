@@ -4,49 +4,52 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 
-public class Keyboard {
-  protected EventHandler<KeyEvent> eventHandler;
-  protected String result;
+public class Keyboard implements EventHandler<KeyEvent> {
+  protected boolean[] check = new boolean[200];
 
   public Keyboard(Scene scene) {
-    eventHandler = new EventHandler<KeyEvent>() {
-      @Override
-      public void handle(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-          case UP:
-            result = keyEvent.getCode().toString();
-            System.out.println("UP");
-            break;
-          case LEFT:
-            result = keyEvent.getCode().toString();
-            System.out.println("LEFT");
-            break;
-          case DOWN:
-            result = keyEvent.getCode().toString();
-            System.out.println("DOWN");
-            break;
-          case RIGHT:
-            result = keyEvent.getCode().toString();
-            System.out.println("RIGHT");
-            break;
-          case SPACE:
-            result = keyEvent.getCode().toString();
-            System.out.println("MAKE BOMB");
-            break;
-          default:
-            result = keyEvent.getCode().toString();
-            System.out.println("Another");
-            break;
-        }
-      }
-    };
-    scene.setOnKeyPressed(eventHandler);
+    scene.setOnKeyPressed(this);
+    scene.setOnKeyReleased(this);
   }
 
   public void update() {
   }
 
-  public String getKey() {
-    return result;
+  @Override
+  public void handle(KeyEvent keyEvent) {
+    if (KeyEvent.KEY_PRESSED.equals(keyEvent.getEventType())) {
+      switch (keyEvent.getCode()) {
+        case DOWN:
+          check[java.awt.event.KeyEvent.VK_DOWN] = true;
+          break;
+        case UP:
+          check[java.awt.event.KeyEvent.VK_UP] = true;
+          break;
+        case LEFT:
+          check[java.awt.event.KeyEvent.VK_LEFT] = true;
+          break;
+        case RIGHT:
+          check[java.awt.event.KeyEvent.VK_RIGHT] = true;
+          break;
+      }
+    } else if (keyEvent.KEY_RELEASED.equals(keyEvent.getEventType())) {
+      switch (keyEvent.getCode()) {
+        case DOWN:
+          check[java.awt.event.KeyEvent.VK_DOWN] = false;
+          break;
+        case UP:
+          check[java.awt.event.KeyEvent.VK_UP] = false;
+          break;
+        case LEFT:
+          check[java.awt.event.KeyEvent.VK_LEFT] = false;
+          break;
+        case RIGHT:
+          check[java.awt.event.KeyEvent.VK_RIGHT] = false;
+          break;
+      }
+    }
+  }
+  public boolean isPressed(int keyEvent) {
+    return check[keyEvent];
   }
 }
