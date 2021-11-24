@@ -72,7 +72,7 @@ public class GameLauncher extends Application {
     // hàm tạo map
     public void createMap() {
         try {
-            File file = new File("D:\\Code\\OOP\\Bomberman\\res\\levels\\1.txt");
+            File file = new File("F:\\Bomberman-BTL-N10\\res\\levels\\1.txt");
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
