@@ -2,13 +2,18 @@ package main.java.Entities;
 
 import javafx.scene.image.Image;
 
-public class Oneal extends Entities {
+public class Oneal extends Entity {
   public Oneal(int x, int y, Image img) {
     super(x, y, img);
   }
 
   @Override
   public void update() {
+
+  }
+
+  @Override
+  public void collided(Entity entity) {
 
   }
 }

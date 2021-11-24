@@ -7,7 +7,7 @@ import main.java.GameLauncher;
 import main.java.Graphics.Sprite;
 import main.java.Input.Keyboard;
 
-public class Bomber extends Entities {
+public class Bomber extends Entity {
   protected Keyboard keyboard;
   public Bomber(double x, double y, Image img, Scene scene) {
     super(x, y, img);
@@ -32,5 +32,10 @@ public class Bomber extends Entities {
       x++;
       System.out.println(this.x + " " + this.y);
     }
+  }
+
+  @Override
+  public void collided(Entity entity) {
+
   }
 }

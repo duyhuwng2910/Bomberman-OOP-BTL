@@ -2,21 +2,18 @@ package main.java;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import main.java.Entities.Balloom;
 import main.java.Entities.Bomber;
 import main.java.Entities.Brick;
-import main.java.Entities.Entities;
+import main.java.Entities.Entity;
 import main.java.Entities.Grass;
 import main.java.Entities.Items;
 import main.java.Entities.Oneal;
@@ -25,7 +22,6 @@ import main.java.Entities.Wall;
 import main.java.Graphics.Sprite;
 import java.util.ArrayList;
 import java.util.List;
-import main.java.Input.Keyboard;
 
 public class GameLauncher extends Application {
 
@@ -34,9 +30,9 @@ public class GameLauncher extends Application {
 
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entities> entities = new ArrayList<>();
-    private List<Entities> stillObjects = new ArrayList<>();
-    private List<Entities> itemsList = new ArrayList<>();
+    private List<Entity> entities = new ArrayList<>();
+    private List<Entity> stillObjects = new ArrayList<>();
+    private List<Entity> itemsList = new ArrayList<>();
     private List<String> map = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -93,15 +89,10 @@ public class GameLauncher extends Application {
             System.out.println("Error");
         }
 
-        Entities staticObject;
-        Entities dynamicObject;
+        Entity staticObject;
+        Entity dynamicObject;
         Items items;
-//        for (int i = 0; i < WIDTH; i++) {
-//            for (int j = 0; j < HEIGHT; j++) {
-//                    staticObject = new Grass(i, j, Sprite.grass.getFxImage());
-//                    stillObjects.add(staticObject);
-//            }
-//        }
+
         for (int i = 0; i < map.size(); i++) {
             for (int j = 0; j < map.get(i).length(); j++) {
                 switch (map.get(i).charAt(j)) {
@@ -159,7 +150,7 @@ public class GameLauncher extends Application {
     }
 
     public void update() {
-        entities.forEach(Entities::update);
+        entities.forEach(Entity::update);
     }
 
     public void render() {
