@@ -10,15 +10,15 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-import main.java.Entities.Balloom;
-import main.java.Entities.Bomber;
-import main.java.Entities.Brick;
+import main.java.Entities.dynamicEntities.Balloom;
+import main.java.Entities.dynamicEntities.Bomber;
+import main.java.Entities.staticEntities.Destroyable.Brick;
 import main.java.Entities.Entity;
-import main.java.Entities.Grass;
-import main.java.Entities.Items;
-import main.java.Entities.Oneal;
-import main.java.Entities.Portal;
-import main.java.Entities.Wall;
+import main.java.Entities.staticEntities.Grass;
+import main.java.Entities.staticEntities.Items.Items;
+import main.java.Entities.dynamicEntities.Oneal;
+import main.java.Entities.staticEntities.Portal;
+import main.java.Entities.staticEntities.Wall;
 import main.java.Graphics.Sprite;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class GameLauncher extends Application {
     // hàm tạo map
     public void createMap() {
         try {
-            File file = new File("F:\\Bomberman-BTL-N10\\res\\levels\\1.txt");
+            File file = new File("D:\\Code\\OOP\\Bomberman\\res\\levels\\1.txt");
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
@@ -97,17 +97,17 @@ public class GameLauncher extends Application {
             for (int j = 0; j < map.get(i).length(); j++) {
                 switch (map.get(i).charAt(j)) {
                     case '#':
-                        staticObject = new Wall(j, i, Sprite.wall.getFxImage());
+                        staticObject = new Wall(j, i, Sprite.wall.getFxImage(), Sprite.wall);
                         stillObjects.add(staticObject);
                         break;
                     case '*':
-                        staticObject = new Brick(j, i, Sprite.brick.getFxImage());
+                        staticObject = new Brick(j, i, Sprite.brick.getFxImage(), Sprite.brick);
                         stillObjects.add(staticObject);
                         break;
                     case 'x':
-                        staticObject = new Portal(j, i, Sprite.portal.getFxImage());
+                        staticObject = new Portal(j, i, Sprite.portal.getFxImage(), Sprite.portal);
                         stillObjects.add(staticObject);
-                        staticObject = new Brick(j, i, Sprite.brick.getFxImage());
+                        staticObject = new Brick(j, i, Sprite.brick.getFxImage(), Sprite.brick);
                         stillObjects.add(staticObject);
                         break;
                     case 'p':
@@ -115,33 +115,33 @@ public class GameLauncher extends Application {
                         entities.add(dynamicObject);
                         break;
                     case '1':
-                        dynamicObject = new Balloom(j, i, Sprite.balloom_right1.getFxImage());
+                        dynamicObject = new Balloom(j, i, Sprite.balloom_right1.getFxImage(), Sprite.balloom_right1);
                         entities.add(dynamicObject);
                         break;
                     case '2':
-                        dynamicObject = new Oneal(j, i, Sprite.oneal_right1.getFxImage());
+                        dynamicObject = new Oneal(j, i, Sprite.oneal_right1.getFxImage(), Sprite.oneal_right1);
                         entities.add(dynamicObject);
                         break;
                     case 'b':
-                        items = new Items(j, i, Sprite.bomb.getFxImage());
+                        items = new Items(j, i, Sprite.bomb.getFxImage(), Sprite.bomb);
                         itemsList.add(items);
-                        staticObject = new Brick(j, i, Sprite.brick.getFxImage());
+                        staticObject = new Brick(j, i, Sprite.brick.getFxImage(), Sprite.brick);
                         stillObjects.add(staticObject);
                         break;
                     case 's':
-                        items = new Items(j, i, Sprite.powerup_speed.getFxImage());
+                        items = new Items(j, i, Sprite.powerup_speed.getFxImage(), Sprite.powerup_speed);
                         itemsList.add(items);
-                        staticObject = new Brick(j, i, Sprite.brick.getFxImage());
+                        staticObject = new Brick(j, i, Sprite.brick.getFxImage(), Sprite.brick);
                         stillObjects.add(staticObject);
                         break;
                     case 'f':
-                        items = new Items(j, i, Sprite.powerup_flames.getFxImage());
+                        items = new Items(j, i, Sprite.powerup_flames.getFxImage(), Sprite.powerup_flames);
                         itemsList.add(items);
-                        staticObject = new Brick(j, i, Sprite.brick.getFxImage());
+                        staticObject = new Brick(j, i, Sprite.brick.getFxImage(), Sprite.brick);
                         stillObjects.add(staticObject);
                         break;
                     default:
-                        staticObject = new Grass(j, i, Sprite.grass.getFxImage());
+                        staticObject = new Grass(j, i, Sprite.grass.getFxImage(), Sprite.grass);
                         stillObjects.add(staticObject);
                         break;
                 }

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <ScappleDocument ID="452693F5-722D-45CE-8132-CE95C3110E78" Version="1.1">
    <Notes>
-      <Note Width="129.883" FontSize="12" ID="0" Position="981.9,261.4">
+      <Note Width="129.883" FontSize="12" ID="0" Position="871.1,269.4">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -111,12 +111,13 @@
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>&lt;&lt;Abstract> Entities
+         <String>&lt;&lt;Abstract>> Entities
 - x: double
 - y: double
 - Images: Image
 
 + render(gc: GraphicsContext): void
+++ collided(Entity e): boolean
 ++ update(): void </String>
          <ConnectedNoteIDs>12-13</ConnectedNoteIDs>
       </Note>
@@ -126,7 +127,7 @@
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
          <String>Dynamic entities</String>
-         <ConnectedNoteIDs>0-1, 11</ConnectedNoteIDs>
+         <ConnectedNoteIDs>0-1, 11, 15-16</ConnectedNoteIDs>
          <PointsToNoteIDs>11</PointsToNoteIDs>
       </Note>
       <Note Width="82.6782" FontSize="12" ID="13" Position="415.5,169.5">
@@ -137,6 +138,33 @@
          <String>Static entities</String>
          <ConnectedNoteIDs>2-7, 11</ConnectedNoteIDs>
          <PointsToNoteIDs>11</PointsToNoteIDs>
+      </Note>
+      <Note Width="104.358" FontSize="12" ID="14" Position="48.0,37.5">
+         <Appearance>
+            <Alignment>Left</Alignment>
+            <Border Weight="2" Style="Rounded"/>
+         </Appearance>
+         <String>Chú thích:
++: Hàm public
+++: Hàm abstract</String>
+      </Note>
+      <Note Width="53.3203" FontSize="12" ID="15" Position="775.4,341.3">
+         <Appearance>
+            <Alignment>Left</Alignment>
+            <Border Weight="2" Style="Rounded"/>
+         </Appearance>
+         <String>Balloom</String>
+         <ConnectedNoteIDs>12</ConnectedNoteIDs>
+         <PointsToNoteIDs>12</PointsToNoteIDs>
+      </Note>
+      <Note Width="41.4307" FontSize="12" ID="16" Position="660.1,229.4">
+         <Appearance>
+            <Alignment>Left</Alignment>
+            <Border Weight="2" Style="Rounded"/>
+         </Appearance>
+         <String>Oneal</String>
+         <ConnectedNoteIDs>12</ConnectedNoteIDs>
+         <PointsToNoteIDs>12</PointsToNoteIDs>
       </Note>
    </Notes>
    <BackgroundShapes/>

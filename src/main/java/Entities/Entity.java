@@ -14,13 +14,21 @@ public abstract class Entity {
     //Tọa độ Y tính từ góc trái trên trong Canvas
     protected double y;
 
+    protected boolean removed = false;
+
     protected Image img;
 
+    protected Sprite sprite;
+
     //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
-    public Entity(double xUnit, double yUnit, Image img) {
+    public Entity(double xUnit, double yUnit, Image img, Sprite sprite) {
         this.x = xUnit * Sprite.SCALED_SIZE;
         this.y = yUnit * Sprite.SCALED_SIZE;
         this.img = img;
+        this.sprite = sprite;
+    }
+
+    protected Entity() {
     }
 
     /**
@@ -40,5 +48,29 @@ public abstract class Entity {
     /**
      * Phương thức collied dùng để xử lý va chạm của 2 entity.
      */
-    public abstract void collided(Entity entity);
+    public abstract boolean collided(Entity entity);
+
+    public void remove() {
+        removed = true;
+    }
+
+    public boolean isRemoved() {
+        return removed;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public Image getImg() {
+        return img;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
 }
