@@ -5,7 +5,7 @@ import main.java.Entities.staticEntities.Destroyable.DestroyableTile;
 
 /**
  * Class dùng để chứa và quản lý nhiều entity tại cùng một vị trí
- * Ví dụ: tại vị trí có chứa item, có 3 entity [Grass, Item, Brick]
+ * Ví dụ: tại vị trí có chứa item flash, có 3 entity [Grass, flashItem, Brick]
  */
 public class LayeredEntity extends Entity {
   protected LinkedList<Entity> entities = new LinkedList<>();
@@ -25,11 +25,27 @@ public class LayeredEntity extends Entity {
 
   @Override
   public void update() {
+    clearRemoved();
+    getTopEntity().update();
+  }
 
+  public Entity getTopEntity() {
+    return entities.getLast();
+  }
+
+  private void clearRemoved() {
+    Entity topEntity = getTopEntity();
+    if(topEntity.isRemoved())  {
+      entities.removeLast();
+    }
+  }
+
+  public void addBeforeTop(Entity e) {
+    entities.add(entities.size() - 1, e);
   }
 
   @Override
   public boolean collided(Entity entity) {
-    return false;
+    return getTopEntity().collided(entity);
   }
 }
