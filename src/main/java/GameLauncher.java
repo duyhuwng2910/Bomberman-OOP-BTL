@@ -72,7 +72,7 @@ public class GameLauncher extends Application {
     // hàm tạo map
     public void createMap() {
         try {
-            File file = new File("D:\\Code\\OOP\\Bomberman\\res\\levels\\1.txt");
+            File file = new File("./res/levels/1.txt");
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
@@ -111,7 +111,7 @@ public class GameLauncher extends Application {
                         stillObjects.add(staticObject);
                         break;
                     case 'p':
-            dynamicObject = new Bomber(j, i, Sprite.player_right.getFxImage(), canvas.getScene());
+                        dynamicObject = new Bomber(j, i, Sprite.player_right.getFxImage(), canvas.getScene());
                         entities.add(dynamicObject);
                         break;
                     case '1':

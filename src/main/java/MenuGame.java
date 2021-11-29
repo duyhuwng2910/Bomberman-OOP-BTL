@@ -15,7 +15,7 @@ public class MenuGame {
     private Scene mainScene;
     private Stage mainStage;
 
-    private final static int MENU_BUTTON_START_X = 100;
+    private final static int MENU_BUTTON_START_X = 200;
     private final static int MENU_BUTTON_START_Y = 100;
 
     List<GameButton> menuButton;

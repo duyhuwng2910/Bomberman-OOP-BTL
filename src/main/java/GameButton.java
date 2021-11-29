@@ -45,41 +45,29 @@ public class GameButton extends Button {
 
     private void initializeButtonListeners() {
 
-        setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(event.getButton().equals(MouseButton.PRIMARY)) {
-                    setButtonPressedStyle();
-                }
-
+        setOnMousePressed(event -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)) {
+                setButtonPressedStyle();
             }
+
         });
-        setOnMouseReleased(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(event.getButton().equals(MouseButton.PRIMARY)) {
-                    setButtonPressedStyle();
-                }
-
+        setOnMouseReleased(event -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)) {
+                setButtonPressedStyle();
             }
+
         });
-        setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(event.getButton().equals(MouseButton.PRIMARY)) {
-                    setButtonPressedStyle();
-                }
-
+        setOnMouseEntered(event -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)) {
+                setButtonPressedStyle();
             }
+
         });
-        setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if(event.getButton().equals(MouseButton.PRIMARY)) {
-                    setButtonPressedStyle();
-                }
-
+        setOnMouseExited(event -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)) {
+                setButtonPressedStyle();
             }
+
         });
     }
 }
