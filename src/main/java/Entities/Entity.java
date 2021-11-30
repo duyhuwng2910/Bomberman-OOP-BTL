@@ -1,13 +1,11 @@
 package main.java.Entities;
 
-import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
+import main.java.Graphics.Render;
+import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
+import main.java.Level.Coordinates;
 
-public abstract class Entity {
+public abstract class Entity implements Render {
     //Tọa độ X tính từ góc trái trên trong Canvas
     protected double x;
 
@@ -16,28 +14,22 @@ public abstract class Entity {
 
     protected boolean removed = false;
 
-    protected Image img;
-
     protected Sprite sprite;
 
-    //Khởi tạo đối tượng, chuyển từ tọa độ đơn vị sang tọa độ trong canvas
-    public Entity(double xUnit, double yUnit, Image img, Sprite sprite) {
-        this.x = xUnit * Sprite.SCALED_SIZE;
-        this.y = yUnit * Sprite.SCALED_SIZE;
-        this.img = img;
+    public Entity(double x, double y, Sprite sprite) {
+        this.x = x;
+        this.y = y;
         this.sprite = sprite;
     }
 
-    protected Entity() {
-    }
+  protected Entity() {
+  }
 
-    /**
+  /**
      * Phương thức render được gọi liên tục trong vòng lặp game
      * để cập nhật hình ảnh của các entity theo trạng thái.
      */
-    public void render(GraphicsContext gc) {
-        gc.drawImage(img, x, y);
-    }
+    public abstract void render(Screen screen);
 
     /**
      * Phương thức update được gọi liên tục trong vòng lặp game
@@ -66,11 +58,15 @@ public abstract class Entity {
         return y;
     }
 
-    public Image getImg() {
-        return img;
-    }
-
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public int getXTile() {
+        return Coordinates.pixelToTile(x + sprite.SIZE / 2);
+    }
+
+    public int getYTile() {
+        return Coordinates.pixelToTile(y - sprite.SIZE / 2);
     }
 }

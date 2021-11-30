@@ -1,9 +1,9 @@
-package main.java.Entities;
+package main.java.Entities.bomb;
 
-import main.java.Entities.bomb.FlameSegment;
+import main.java.Entities.Entity;
 import main.java.Graphics.Screen;
 
-public class Bomb extends AnimatedEntity {
+public class FlameSegment extends Entity {
 
   @Override
   public void render(Screen screen) {
@@ -18,9 +18,5 @@ public class Bomb extends AnimatedEntity {
   @Override
   public boolean collided(Entity entity) {
     return false;
-  }
-
-  public FlameSegment flameAt(int x, int y) {
-
   }
 }

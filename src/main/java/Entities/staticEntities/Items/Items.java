@@ -2,29 +2,18 @@ package main.java.Entities.staticEntities.Items;
 
 import javafx.scene.image.Image;
 import main.java.Entities.Entity;
+import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 
 public class Items extends Entity {
 
-  public Items(double x, double y, Image img, Sprite sprite) {
-    super(x, y, img, sprite);
+  public Items(double x, double y, Sprite sprite) {
+    super(x, y, sprite);
   }
 
-  class bombItem extends Entity {
+  @Override
+  public void render(Screen screen) {
 
-    public bombItem(int x, int y, Image img, Sprite sprite) {
-      super(x, y, img, sprite);
-    }
-
-    @Override
-    public void update() {
-
-    }
-
-    @Override
-    public boolean collided(Entity entity) {
-      return false;
-    }
   }
 
   @Override

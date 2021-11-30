@@ -2,6 +2,7 @@ package main.java.Entities;
 
 import java.util.LinkedList;
 import main.java.Entities.staticEntities.Destroyable.DestroyableTile;
+import main.java.Graphics.Screen;
 
 /**
  * Class dùng để chứa và quản lý nhiều entity tại cùng một vị trí
@@ -10,7 +11,7 @@ import main.java.Entities.staticEntities.Destroyable.DestroyableTile;
 public class LayeredEntity extends Entity {
   protected LinkedList<Entity> entities = new LinkedList<>();
 
-  public LayeredEntity(double x, double y, Entity[] entity) {
+  public LayeredEntity(double x, double y, Entity ... entity) {
     this.x = x;
     this.y = y;
     for (int i = 0; i < entities.size(); i++) {
@@ -21,6 +22,11 @@ public class LayeredEntity extends Entity {
         }
       }
     }
+  }
+
+  @Override
+  public void render(Screen screen) {
+
   }
 
   @Override

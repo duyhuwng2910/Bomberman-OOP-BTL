@@ -1,6 +1,7 @@
 package main.java.Entities;
 
-import javafx.scene.paint.Color;
+import java.awt.Color;
+import javafx.stage.Screen;
 
 /**
  * Class dùng để hiện thông báo về các sự kiện
@@ -9,11 +10,11 @@ import javafx.scene.paint.Color;
 public class Notification extends Entity {
   private String notification;
   private int duration;
-  private Color color;
+  private java.awt.Color color;
   private int size;
 
   public Notification(String notification, double x, double y,
-      int duration, Color color, int size) {
+      int duration, java.awt.Color color, int size) {
     this.x = x;
     this.y = y;
     this.notification = notification;
@@ -38,7 +39,7 @@ public class Notification extends Entity {
     this.duration = duration;
   }
 
-  public Color getColor() {
+  public java.awt.Color getColor() {
     return color;
   }
 
@@ -52,6 +53,11 @@ public class Notification extends Entity {
 
   public void setSize(int size) {
     this.size = size;
+  }
+
+  @Override
+  public void render(main.java.Graphics.Screen screen) {
+
   }
 
   @Override

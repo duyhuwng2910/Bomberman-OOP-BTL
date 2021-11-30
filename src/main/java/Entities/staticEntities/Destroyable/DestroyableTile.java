@@ -2,7 +2,7 @@ package main.java.Entities.staticEntities.Destroyable;
 
 import javafx.scene.image.Image;
 import main.java.Entities.Entity;
-import main.java.Entities.staticEntities.Items.Tile;
+import main.java.Entities.staticEntities.Tile;
 import main.java.Graphics.Sprite;
 
 public class DestroyableTile extends Tile {

@@ -1,8 +1,5 @@
 package main.java.Entities;
 
-import javafx.scene.image.Image;
-import main.java.Graphics.Sprite;
-
 // TODO: Class dành cho enitity có hiệu ứng chuyển cảnh
 public abstract class AnimatedEntity extends Entity {
   protected int animated = 0;
@@ -14,10 +11,6 @@ public abstract class AnimatedEntity extends Entity {
     } else {
       animated = 0;
     }
-  }
-
-  public AnimatedEntity(double x, double y, Image img, Sprite sprite) {
-    super(x, y, img, sprite);
   }
 
 }
