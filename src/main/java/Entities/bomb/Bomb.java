@@ -70,7 +70,7 @@ public class Bomb extends AnimatedEntity {
         flames = new Flame[4];
         for (int i = 0; i < 4; i++) {
             flames[i]  = new Flame((int) this.x, (int) this.y,
-                Game.getBombRadius(), this.board);
+                i, Game.getBombRadius(), this.board);
         }
         // Hiệu ứng âm thanh Bomb nổ
         Sound.play("");

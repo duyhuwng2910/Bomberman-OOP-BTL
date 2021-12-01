@@ -1,11 +1,8 @@
 package main.java.Sound;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
+import javax.print.attribute.standard.Media;
 import javax.sound.sampled.*;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Sound {
