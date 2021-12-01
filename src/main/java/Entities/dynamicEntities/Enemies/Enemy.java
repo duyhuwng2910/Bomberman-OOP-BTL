@@ -44,7 +44,7 @@ public abstract class Enemy extends Character {
     animate();
 
     if(!isAlive) {
-      afterKill();
+      afterKilled();
       return;
     }
 
@@ -62,7 +62,7 @@ public abstract class Enemy extends Character {
         sprite = deadSprite;
         this.animated = 0;
       } else {
-        sprite = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, _animate, 60);
+        sprite = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animated, 60);
       }
     }
     screen.renderEntity((int)x, (int)y - sprite.SIZE, this);

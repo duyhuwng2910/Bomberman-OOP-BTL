@@ -1,6 +1,7 @@
 package main.java.Level;
 
 import main.java.Board;
+import main.java.Exception.LoadLevelException;
 
 /**
  * Class dùng để load và lưu trữ

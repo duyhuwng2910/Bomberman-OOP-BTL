@@ -2,6 +2,7 @@ package main.java.Entities.staticEntities.Destroyable;
 
 import javafx.scene.image.Image;
 import main.java.Entities.Entity;
+import main.java.Entities.bomb.Flame;
 import main.java.Entities.staticEntities.Tile;
 import main.java.Graphics.Sprite;
 
@@ -13,8 +14,8 @@ public class DestroyableTile extends Tile {
   protected int timeToDisapear = 20;
   protected Sprite belowSprite = Sprite.grass;
 
-  public DestroyableTile(double x, double y, Image img, Sprite sprite) {
-    super(x, y, img, sprite);
+  public DestroyableTile(double x, double y, Sprite sprite) {
+    super(x, y, sprite);
   }
 
   @Override
@@ -40,6 +41,9 @@ public class DestroyableTile extends Tile {
 
   @Override
   public boolean collided(Entity entity) {
+    if (entity instanceof Flame) {
+      destroy();
+    }
     return false;
   }
 
@@ -47,4 +51,15 @@ public class DestroyableTile extends Tile {
     belowSprite = sprite;
   }
 
+  protected Sprite movingSprite(Sprite normal, Sprite x1, Sprite x2) {
+    int calc = animate % 30;
+
+    if (calc < 10) {
+      return normal;
+    } else if (calc < 20) {
+      return x1;
+    } else {
+      return x2;
+    }
+  }
 }

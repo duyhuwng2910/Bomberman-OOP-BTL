@@ -16,6 +16,7 @@ import main.java.Entities.staticEntities.Items.FlameItems;
 import main.java.Entities.staticEntities.Items.SpeedItems;
 import main.java.Entities.staticEntities.Portal;
 import main.java.Entities.staticEntities.Wall;
+import main.java.Exception.LoadLevelException;
 import main.java.Game;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
@@ -23,7 +24,7 @@ import main.java.Graphics.Sprite;
 public class FileLevelLoader extends LevelLoader {
   /**
    * Ma trận chứa thông tin bản đồ, mỗi phần tử lưu giá trị kí tự đọc được từ
-   * ma trận bản đồ trong tệp cấu hình
+   * ma trận bản đồ trong file dạng txt.
    */
   private static char[][] map;
 
@@ -33,18 +34,20 @@ public class FileLevelLoader extends LevelLoader {
 
   @Override
   public void loadLevel(int level) {
-    // TODO: đọc dữ liệu từ tệp cấu hình /levels/Level{level}.txt
-    // TODO: cập nhật các giá trị đọc được vào _width, _height, _level, _map
+    /**
+     * đọc dữ liệu từ tệp cấu hình /levels/{level}.txt
+     * cập nhật các giá trị đọc được vào bao
+     * gồm width, height, level, map
+     */
     List<String> list = new ArrayList<>();
 
     try {
-      FileReader fr = new FileReader("res\\levels\\Level" + level + ".txt");//doc tep luu map
+      FileReader fr = new FileReader("res\\levels\\" + level + ".txt"); //Đọc file lưu màn chơi
       BufferedReader br = new BufferedReader(fr);
       String line = br.readLine();
       while (!line.equals("")) {
         list.add(line);
         line = br.readLine();
-        //doc file txt luu vao list
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -54,6 +57,7 @@ public class FileLevelLoader extends LevelLoader {
     this.height = Integer.parseInt(arrays[1]);
     this.width = Integer.parseInt(arrays[2]);
     map = new char[height][width];
+
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
         map[i][j] = list.get(i + 1).charAt(j);
@@ -100,7 +104,6 @@ public class FileLevelLoader extends LevelLoader {
             Screen.setOffset(0, 0);
             board.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
             break;
-
           // Thêm balloon
           case '1':
             board.addCharacter(new Balloom(Coordinates.tileToPixel(x),
