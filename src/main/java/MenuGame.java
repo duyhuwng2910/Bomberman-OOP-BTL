@@ -1,5 +1,7 @@
 package main.java;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -48,8 +50,10 @@ public class MenuGame {
     }
 
     private void createPlayButton() {
-        GameButton playButton = new GameButton("PLAY");
+        GameButton playButton = new GameButton("START");
         addMenuButton(playButton);
+
+        //playButton.setOnAction(event -> showSubScene(shipChooserSubscene));
     }
 
     private void createModeButton() {
@@ -65,6 +69,8 @@ public class MenuGame {
     private void createExitButton() {
         GameButton exitButton = new GameButton("EXIT");
         addMenuButton(exitButton);
+
+        exitButton.setOnAction(event -> mainStage.close());
     }
 
     private void createBackground() {
