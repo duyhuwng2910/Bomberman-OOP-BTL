@@ -130,12 +130,6 @@ public class Bomber extends Character {
           this.sprite = Sprite.movingSprite(Sprite.player_left_1, Sprite.player_left_2, animated, 20);
         }
         break;
-      default:
-        this.sprite = Sprite.player_right;
-        if (isMoving) {
-          this.sprite = Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, animated, 20);
-        }
-        break;
     }
   }
 

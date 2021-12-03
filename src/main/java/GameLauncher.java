@@ -51,15 +51,8 @@ public class GameLauncher extends Application {
                 update();
             }
         };
-
         timer.start();
 
-        createMap();
-
-    }
-
-    // hàm tạo map
-    public void createMap() {
     }
 
     public void update() {

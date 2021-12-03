@@ -32,7 +32,7 @@ public class Flame extends Entity {
     /**
      * tính toán độ dài Flame, tương ứng với số lượng segment.
      */
-    flameSegments = new FlameSegment[calculatePermitedDistance()];
+    flameSegments = new FlameSegment[calculatePermittedDistance()];
 
     /**
      * biến last dùng để đánh dấu cho segment cuối cùng
@@ -66,11 +66,11 @@ public class Flame extends Entity {
    * Phương thức dùng để tính toán độ dài của Flame,
    * nếu gặp vật cản là Brick/Wall thì độ dài sẽ bị cắt ngắn.
    */
-  private int calculatePermitedDistance() {
+  private int calculatePermittedDistance() {
     int radius = 0;
     int x = (int) this.x;
     int y = (int) this.y;
-    while(radius < this.radius) {
+    while (radius < this.radius) {
       if (direction == 0) y--;
       if (direction == 1) x++;
       if (direction == 2) y++;
