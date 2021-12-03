@@ -88,7 +88,7 @@ public class Bomber extends Character {
     Bomb bomb = new Bomb(xt, yt, this.board);
     board.addBomb(bomb);
     // Hiệu ứng âm thanh khi đặt bomb thành công
-    Sound.play("");
+    Sound.play("bomset");
   }
 
   private void clearBombs() {
@@ -203,7 +203,7 @@ public class Bomber extends Character {
     } else {
       isAlive = false;
       // Hiệu ứng âm thanh khi Bomber bị tiêu diệt
-      Sound.play("");
+      Sound.play("endgame");
     }
   }
 

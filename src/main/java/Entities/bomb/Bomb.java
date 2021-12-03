@@ -73,7 +73,7 @@ public class Bomb extends AnimatedEntity {
                 i, Game.getBombRadius(), this.board);
         }
         // Hiệu ứng âm thanh Bomb nổ
-        Sound.play("");
+        Sound.play("bom");
     }
 
     public void explodedTime() {

@@ -161,7 +161,7 @@ public abstract class Enemy extends Character {
     Notification notification = new Notification("+" + points,
         getXNotification(), getYNotification(), 2, Color.white, 14);
     board.addNotification(notification);
-    Sound.play("AA126_11");
+    Sound.play("aaa");
   }
 
 
