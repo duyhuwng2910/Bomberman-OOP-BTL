@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import main.java.GUI.Frame;
 import main.java.Graphics.Screen;
 import main.java.Input.Keyboard;
 
@@ -38,7 +39,7 @@ public class Game extends Canvas {
 
   private Board board;
   private Screen screen;
-  private Frame frame;
+  private main.java.GUI.Frame frame;
 
   private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
   private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -97,24 +98,25 @@ public class Game extends Canvas {
 
   public void start() {
     running = true;
-    long  lastTime = System.nanoTime();
+    long lastTime = System.nanoTime();
     long timer = System.currentTimeMillis();
     final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second
     double delta = 0;
     int frames = 0;
     int updates = 0;
+
     requestFocus();
 
     while (running) {
       long now = System.nanoTime();
       delta += (now - lastTime) / ns;
       lastTime = now;
+
       while (delta >= 1) {
         update();
         updates++;
         delta--;
       }
-
       if (paused) {
         if (screenDelay <= 0) {
           board.setShow(-1);
@@ -124,7 +126,6 @@ public class Game extends Canvas {
       } else {
         renderGame();
       }
-
       frames++;
 
       if (System.currentTimeMillis() - timer > 1000) {

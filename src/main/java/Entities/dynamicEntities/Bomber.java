@@ -70,7 +70,7 @@ public class Bomber extends Character {
   }
 
   private void detectPlaceOfBombs() {
-    if(Keyboard.space && Game.getBombRate() > 0 && timeBetweenPutBombs < 0) {
+    if(keyboard.space && Game.getBombRate() > 0 && timeBetweenPutBombs < 0) {
       int xt = Coordinates.pixelToTile(this.x + sprite.getSize() / 2);
       int yt = Coordinates.pixelToTile( (this.y + sprite.getSize() / 2) - sprite.getSize() ); //subtract half player height and minus 1 y position
 
@@ -128,12 +128,6 @@ public class Bomber extends Character {
         this.sprite = Sprite.player_left;
         if (isMoving) {
           this.sprite = Sprite.movingSprite(Sprite.player_left_1, Sprite.player_left_2, animated, 20);
-        }
-        break;
-      default:
-        this.sprite = Sprite.player_right;
-        if (isMoving) {
-          this.sprite = Sprite.movingSprite(Sprite.player_right_1, Sprite.player_right_2, animate, 20);
         }
         break;
     }

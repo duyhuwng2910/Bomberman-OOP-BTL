@@ -1,55 +1,35 @@
 package main.java.Input;
 
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Keyboard implements EventHandler<KeyEvent> {
-  protected boolean[] check = new boolean[200];
-
-  public Keyboard(Scene scene) {
-    scene.setOnKeyPressed(this);
-    scene.setOnKeyReleased(this);
-  }
+/**
+ * Class Keyboard dùng để nhận dữ liệu từ bàn phím.
+ */
+public class Keyboard implements KeyListener {
+  private boolean[] keys = new boolean[200];
+  public boolean up, down, left, right, space;
 
   public void update() {
+    up = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
+    down = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
+    left = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
+    right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
+    space = keys[KeyEvent.VK_SPACE] || keys[KeyEvent.VK_X];
   }
 
   @Override
-  public void handle(KeyEvent keyEvent) {
-    if (KeyEvent.KEY_PRESSED.equals(keyEvent.getEventType())) {
-      switch (keyEvent.getCode()) {
-        case DOWN:
-          check[java.awt.event.KeyEvent.VK_DOWN] = true;
-          break;
-        case UP:
-          check[java.awt.event.KeyEvent.VK_UP] = true;
-          break;
-        case LEFT:
-          check[java.awt.event.KeyEvent.VK_LEFT] = true;
-          break;
-        case RIGHT:
-          check[java.awt.event.KeyEvent.VK_RIGHT] = true;
-          break;
-      }
-    } else if (keyEvent.KEY_RELEASED.equals(keyEvent.getEventType())) {
-      switch (keyEvent.getCode()) {
-        case DOWN:
-          check[java.awt.event.KeyEvent.VK_DOWN] = false;
-          break;
-        case UP:
-          check[java.awt.event.KeyEvent.VK_UP] = false;
-          break;
-        case LEFT:
-          check[java.awt.event.KeyEvent.VK_LEFT] = false;
-          break;
-        case RIGHT:
-          check[java.awt.event.KeyEvent.VK_RIGHT] = false;
-          break;
-      }
-    }
+  public void keyTyped(KeyEvent keyEvent) {}
+
+  @Override
+  public void keyPressed(KeyEvent keyEvent) {
+    keys[keyEvent.getKeyCode()] = true;
+
   }
-  public boolean isPressed(int keyEvent) {
-    return check[keyEvent];
+
+  @Override
+  public void keyReleased(KeyEvent keyEvent) {
+    keys[keyEvent.getKeyCode()] = false;
+
   }
 }
