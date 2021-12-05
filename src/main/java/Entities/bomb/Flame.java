@@ -6,6 +6,10 @@ import main.java.Entities.dynamicEntities.Bomber;
 import main.java.Entities.dynamicEntities.Enemies.Enemy;
 import main.java.Graphics.Screen;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Flame extends Entity {
   protected Board board;
   protected int direction;
@@ -13,7 +17,7 @@ public class Flame extends Entity {
   protected int xOrigin, yOrigin;
   protected FlameSegment[] flameSegments = new FlameSegment[0];
 
-  public Flame(int x, int y, int direction, int radius, Board board) {
+  public Flame(int x, int y, int direction, int radius, Board board) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     this.xOrigin = x;
     this.yOrigin = y;
     this.x = x;
@@ -28,7 +32,7 @@ public class Flame extends Entity {
    * Phương thức tạo các FlameSegment,
    * mỗi segment ứng một đơn vị độ dài.
    */
-  private void createFlameSegments() {
+  private void createFlameSegments() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     /**
      * tính toán độ dài Flame, tương ứng với số lượng segment.
      */
@@ -66,7 +70,7 @@ public class Flame extends Entity {
    * Phương thức dùng để tính toán độ dài của Flame,
    * nếu gặp vật cản là Brick/Wall thì độ dài sẽ bị cắt ngắn.
    */
-  private int calculatePermittedDistance() {
+  private int calculatePermittedDistance() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     int radius = 0;
     int x = (int) this.x;
     int y = (int) this.y;
@@ -109,7 +113,7 @@ public class Flame extends Entity {
   }
 
   @Override
-  public boolean collided(Entity entity) {
+  public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     // TODO: xử lý va chạm với Bomber, Enemy. Chú ý đối tượng này có vị trí chính là vị trí của Bomb đã nổ
     if(entity instanceof Bomber) {
       ((Bomber) entity).kill();

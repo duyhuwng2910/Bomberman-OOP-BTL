@@ -1,6 +1,9 @@
 package main.java.GUI;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import main.java.Game;
@@ -12,7 +15,7 @@ public class Frame extends JFrame {
 
   private Game game;
 
-  public Frame() {
+  public Frame() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     jPanel = new JPanel(new BorderLayout());
     gamePanel = new GamePanel(this);
     infoPanel = new InfoPanel(gamePanel.getGame());

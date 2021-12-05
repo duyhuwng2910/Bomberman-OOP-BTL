@@ -5,6 +5,10 @@ import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 import main.java.Level.Coordinates;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public abstract class Entity implements Render {
     //Tọa độ X tính từ góc trái trên trong Canvas
     protected double x;
@@ -35,12 +39,12 @@ public abstract class Entity implements Render {
      * Phương thức update được gọi liên tục trong vòng lặp game
      * để xử lý sự kiện và cập nhật trạng thái của toàn bộ Entity.
      */
-    public abstract void update();
+    public abstract void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
     /**
      * Phương thức collied dùng để xử lý va chạm của 2 entity.
      */
-    public abstract boolean collided(Entity entity);
+    public abstract boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
     public void remove() {
         removed = true;

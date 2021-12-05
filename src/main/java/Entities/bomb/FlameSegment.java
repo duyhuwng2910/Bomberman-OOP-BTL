@@ -6,6 +6,10 @@ import main.java.Entities.dynamicEntities.Enemies.Enemy;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class FlameSegment extends Entity {
   protected boolean last;
   /**
@@ -64,7 +68,7 @@ public class FlameSegment extends Entity {
   public void update() {}
 
   @Override
-  public boolean collided(Entity entity) {
+  public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     // TODO: xử lý khi FlameSegment va chạm với Character
     if (entity instanceof Bomber) {
       ((Bomber) entity).kill();

@@ -1,6 +1,8 @@
 package main.java.Entities.dynamicEntities.Enemies;
 
 import java.awt.Color;
+import java.io.IOException;
+
 import main.java.Board;
 import main.java.Entities.Entity;
 import main.java.Entities.Notification;
@@ -11,6 +13,9 @@ import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 import main.java.Level.Coordinates;
 import main.java.Sound.Sound;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public abstract class Enemy extends Character {
 
@@ -40,7 +45,7 @@ public abstract class Enemy extends Character {
   }
 
   @Override
-  public void update() {
+  public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     animate();
 
     if(!isAlive) {
@@ -69,7 +74,7 @@ public abstract class Enemy extends Character {
   }
 
   @Override
-  public void calculateMove() {
+  public void calculateMove() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     // TODO: Tính toán hướng đi và di chuyển Enemy theo _ai và cập nhật giá trị cho _direction
     // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không
     // TODO: sử dụng move() để di chuyển
@@ -114,7 +119,7 @@ public abstract class Enemy extends Character {
   }
 
   @Override
-  public boolean canMove(double x, double y) {
+  public boolean canMove(double x, double y) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     double xr = x, yr = y - 16; //subtract y to get more accurate results
 
     //the thing is, subract 15 to 16 (sprite size), so if we add 1 tile we get the next pixel tile with this
@@ -150,7 +155,7 @@ public abstract class Enemy extends Character {
   }
 
   @Override
-  public void kill() {
+  public void kill() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if(!isAlive) {
       return;
     }

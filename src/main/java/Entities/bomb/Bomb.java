@@ -11,6 +11,10 @@ import main.java.Graphics.Sprite;
 import main.java.Level.Coordinates;
 import main.java.Sound.Sound;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Bomb extends AnimatedEntity {
     protected double timeToExplode = 150; //2.5 giây - thời gian phát nổ
     public int timeAfter = 40;// thời gian sau khi bom nổ
@@ -56,7 +60,7 @@ public class Bomb extends AnimatedEntity {
     /**
      * Phương thức xử lý sự kiện Bomb nổ.
      */
-    private void explode() {
+    private void explode() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         exploded = true;
         allowedToPass = true;
 
@@ -81,7 +85,7 @@ public class Bomb extends AnimatedEntity {
     }
 
     @Override
-    public void update() {
+    public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (timeToExplode > 0) {
             timeToExplode--;
         } else {

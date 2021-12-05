@@ -1,5 +1,6 @@
 package main.java.Entities.dynamicEntities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,9 @@ import main.java.Graphics.Screen;
 import main.java.Level.Coordinates;
 import main.java.Sound.Sound;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 public class Bomber extends Character {
   protected Keyboard keyboard;
   private List<Bomb> bombList;
@@ -31,7 +35,7 @@ public class Bomber extends Character {
   }
 
   @Override
-  public void update() {
+  public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     clearBombs();
 
     if (this.isAlive) {
@@ -69,7 +73,7 @@ public class Bomber extends Character {
     Screen.setOffset(Scroll, 0);
   }
 
-  private void detectPlaceOfBombs() {
+  private void detectPlaceOfBombs() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if(keyboard.space && Game.getBombRate() > 0 && timeBetweenPutBombs < 0) {
       int xt = Coordinates.pixelToTile(this.x + sprite.getSize() / 2);
       int yt = Coordinates.pixelToTile( (this.y + sprite.getSize() / 2) - sprite.getSize() ); //subtract half player height and minus 1 y position
@@ -84,7 +88,7 @@ public class Bomber extends Character {
   /**
    * Phương thức đặt Bomb tại vị trí (x,y).
    */
-  private void placeBomb(int xt, int yt) {
+  private void placeBomb(int xt, int yt) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     Bomb bomb = new Bomb(xt, yt, this.board);
     board.addBomb(bomb);
     // Hiệu ứng âm thanh khi đặt bomb thành công
@@ -134,7 +138,7 @@ public class Bomber extends Character {
   }
 
   @Override
-  protected boolean canMove(double xa, double ya) {
+  protected boolean canMove(double xa, double ya) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     for (int i = 0; i < 4; i++) {
       double xt = ((this.x + xa) + i % 2 * 9) / Game.TILES_SIZE;
       double yt = ((this.y + ya) + i / 2 * 10 - 13) / Game.TILES_SIZE;
@@ -148,7 +152,7 @@ public class Bomber extends Character {
   }
 
   @Override
-  protected void calculateMove() {
+  protected void calculateMove() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     int xa = 0, ya = 0;
 
     if(keyboard.up) {
@@ -173,7 +177,7 @@ public class Bomber extends Character {
   }
 
   @Override
-  protected void move(double xa, double ya) {
+  protected void move(double xa, double ya) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (xa > 0) {
       direction = 1;
     }
@@ -197,7 +201,7 @@ public class Bomber extends Character {
   }
 
   @Override
-  public void kill() {
+  public void kill() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (!isAlive) {
       return;
     } else {
@@ -217,7 +221,7 @@ public class Bomber extends Character {
   }
 
   @Override
-  public boolean collided(Entity entity) {
+  public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (entity instanceof Flame){
       this.kill();
       return false;

@@ -2,6 +2,7 @@ package main.java;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +18,9 @@ import main.java.Input.Keyboard;
 import main.java.Entities.dynamicEntities.Character;
 import main.java.Level.FileLevelLoader;
 import main.java.Level.LevelLoader;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * Class Board dùng để quản lý các thao tác điều khiển,
@@ -48,7 +52,7 @@ public class Board implements Render {
   }
 
   @Override
-  public void update() {
+  public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (game.isPaused()) {
       return;
     }
@@ -278,7 +282,7 @@ public class Board implements Render {
     }
   }
 
-  protected void updateEntities() {
+  protected void updateEntities() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (game.isPaused()) {
       return;
     }
@@ -287,7 +291,7 @@ public class Board implements Render {
     }
   }
 
-  protected void updateCharacters() {
+  protected void updateCharacters() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if(game.isPaused()) {
       return;
     }
@@ -299,7 +303,7 @@ public class Board implements Render {
     }
   }
 
-  protected void updateBombs() {
+  protected void updateBombs() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if(game.isPaused()) {
       return;
     }

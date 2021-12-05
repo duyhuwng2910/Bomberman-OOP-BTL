@@ -1,8 +1,12 @@
 package main.java.Entities;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import main.java.Entities.staticEntities.Destroyable.DestroyableTile;
 import main.java.Graphics.Screen;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  * Class dùng để chứa và quản lý nhiều entity tại cùng một vị trí
@@ -30,7 +34,7 @@ public class LayeredEntity extends Entity {
   }
 
   @Override
-  public void update() {
+  public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     clearRemoved();
     getTopEntity().update();
   }
@@ -51,7 +55,7 @@ public class LayeredEntity extends Entity {
   }
 
   @Override
-  public boolean collided(Entity entity) {
+  public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     return getTopEntity().collided(entity);
   }
 }

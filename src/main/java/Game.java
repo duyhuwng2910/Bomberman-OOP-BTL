@@ -4,9 +4,14 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
+
 import main.java.GUI.Frame;
 import main.java.Graphics.Screen;
 import main.java.Input.Keyboard;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Game extends Canvas {
   public static final int TILES_SIZE = 16,
@@ -91,12 +96,12 @@ public class Game extends Canvas {
     bs.show();
   }
 
-  private void update() {
+  private void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     input.update();
     board.update();
   }
 
-  public void start() {
+  public void start() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     running = true;
     long lastTime = System.nanoTime();
     long timer = System.currentTimeMillis();

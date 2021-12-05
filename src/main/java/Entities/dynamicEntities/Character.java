@@ -5,6 +5,10 @@ import main.java.Entities.AnimatedEntity;
 import main.java.Game;
 import main.java.Graphics.Screen;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 /**
  * Class trừu tượng Character dùng để quản lý
  * các sự kiện của các nhân vật có chuyển động
@@ -24,7 +28,7 @@ public abstract class Character extends AnimatedEntity {
   }
 
   @Override
-  public abstract void update();
+  public abstract void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
   @Override
   public abstract void render(Screen screen);
@@ -32,14 +36,14 @@ public abstract class Character extends AnimatedEntity {
   /**
    * Tính toán hướng đi của nhân vật.
    */
-  protected abstract void calculateMove();
+  protected abstract void calculateMove() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
-  protected abstract void move(double xa, double ya);
+  protected abstract void move(double xa, double ya) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
   /**
    * Phương thức được gọi khi đối tượng bị tiêu diệt.
    */
-  public abstract void kill();
+  public abstract void kill() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
   /**
    * Xử lý hiệu ứng khi đối tượng bị tiêu diệt.
@@ -50,7 +54,7 @@ public abstract class Character extends AnimatedEntity {
    * Kiểm tra xem đối tượng có thể
    * di chuyển tới vị trí đã tính toán hay không.
    */
-  protected abstract boolean canMove(double x, double y);
+  protected abstract boolean canMove(double x, double y) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
   protected double getXNotification() {
     return (x * Game.SCALE) + (sprite.SIZE / 2 * Game.SCALE);
