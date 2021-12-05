@@ -1,5 +1,8 @@
 package main.java.Exception;
 
+/**
+ * Class đại diện cho ngoại lệ khi load level của game.
+ */
 public class LoadLevelException extends GameException {
   public LoadLevelException() {
   }

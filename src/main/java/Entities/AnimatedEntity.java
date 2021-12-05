@@ -1,6 +1,8 @@
 package main.java.Entities;
 
-// TODO: Class dành cho enitity có hiệu ứng chuyển cảnh
+/**
+ * Class dành cho enitity có hiệu ứng chuyển cảnh.
+ */
 public abstract class AnimatedEntity extends Entity {
   protected int animated = 0;
   protected final int MAX_ANIMATED = 7500;

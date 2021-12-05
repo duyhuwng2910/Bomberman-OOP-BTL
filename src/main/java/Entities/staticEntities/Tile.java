@@ -1,6 +1,8 @@
 package main.java.Entities.staticEntities;
 
-import javafx.scene.image.Image;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import main.java.Entities.Entity;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
@@ -22,12 +24,11 @@ public class Tile extends Entity {
   }
 
   @Override
-  public void update() {
-
-  }
+  public void update() {}
 
   @Override
-  public boolean collided(Entity entity) {
+  public boolean collided(Entity entity)
+      throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     return false;
   }
 }

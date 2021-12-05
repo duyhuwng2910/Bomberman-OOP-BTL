@@ -7,8 +7,8 @@ import java.util.List;
 import main.java.Board;
 import main.java.Entities.Entity;
 import main.java.Entities.LayeredEntity;
-import main.java.Entities.bomb.Bomb;
-import main.java.Entities.bomb.Flame;
+import main.java.Entities.Bomb.Bomb;
+import main.java.Entities.Bomb.Flame;
 import main.java.Entities.dynamicEntities.Enemies.Enemy;
 import main.java.Entities.staticEntities.Items.Items;
 import main.java.Game;
@@ -21,6 +21,9 @@ import main.java.Sound.Sound;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * Class của nhân vật chính Bomber.
+ */
 public class Bomber extends Character {
   protected Keyboard keyboard;
   private List<Bomb> bombList;

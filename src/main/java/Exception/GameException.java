@@ -1,5 +1,8 @@
 package main.java.Exception;
 
+/**
+ * Class đại diện cho ngoại lệ khi game chạy.
+ */
 public class GameException extends Exception {
   public GameException() {
   }

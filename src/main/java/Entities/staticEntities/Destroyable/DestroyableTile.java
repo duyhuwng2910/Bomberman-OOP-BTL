@@ -1,17 +1,19 @@
 package main.java.Entities.staticEntities.Destroyable;
 
-import javafx.scene.image.Image;
 import main.java.Entities.Entity;
-import main.java.Entities.bomb.Flame;
+import main.java.Entities.Bomb.Flame;
 import main.java.Entities.staticEntities.Tile;
 import main.java.Graphics.Sprite;
 
+/**
+ * Class đại diện cho các thực thể tĩnh có thể bị phá hủy.
+ */
 public class DestroyableTile extends Tile {
 
   private final int MAX_ANIMATE = 7500;
   private int animate = 0;
   protected boolean destroyed = false;
-  protected int timeToDisapear = 20;
+  protected int timeToDisappear = 20;
   protected Sprite belowSprite = Sprite.grass;
 
   public DestroyableTile(double x, double y, Sprite sprite) {
@@ -27,8 +29,8 @@ public class DestroyableTile extends Tile {
         animate = 0;
       }
 
-      if (timeToDisapear > 0) {
-        timeToDisapear--;
+      if (timeToDisappear > 0) {
+        timeToDisappear--;
       } else {
         remove();
       }

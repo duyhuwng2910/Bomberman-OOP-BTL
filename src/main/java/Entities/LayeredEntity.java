@@ -30,7 +30,7 @@ public class LayeredEntity extends Entity {
 
   @Override
   public void render(Screen screen) {
-
+    getTopEntity().render(screen);
   }
 
   @Override
@@ -50,8 +50,8 @@ public class LayeredEntity extends Entity {
     }
   }
 
-  public void addBeforeTop(Entity e) {
-    entities.add(entities.size() - 1, e);
+  public void addBeforeTop(Entity entity) {
+    entities.add(entities.size() - 1, entity);
   }
 
   @Override

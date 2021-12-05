@@ -1,18 +1,22 @@
 package main.java.Graphics;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import javafx.scene.paint.Color;
 import main.java.Board;
 import main.java.Entities.Entity;
 import main.java.Entities.dynamicEntities.Bomber;
 import main.java.Game;
 
+/**
+ * Class xử lý render cho tất cả Entity
+ * và một số màn hình phụ ra Game Panel.
+ */
 public class Screen {
   protected int width, height;
   public int[] pixels;
-  private int transparentColor = Color.BLACK.hashCode();
+  private int transparentColor = 0xffff00ff;
 
   public static int xOffset = 0, yOffset = 0;
 
@@ -28,22 +32,25 @@ public class Screen {
     }
   }
 
-  public void renderEntity(int xp, int yp, Entity entity) { //save entity pixels
+  public void renderEntity(int xp, int yp, Entity entity) {
     xp -= xOffset;
     yp -= yOffset;
     for (int y = 0; y < entity.getSprite().getSize(); y++) {
-      int ya = y + yp; //add offset
+      int ya = y + yp;
 
       for (int x = 0; x < entity.getSprite().getSize(); x++) {
-        int xa = x + xp; //add offset
+        int xa = x + xp;
+
         if (xa < -entity.getSprite().getSize()
             || xa >= this.width || ya < 0 || ya >= this.height) {
-            break; //fix black margins
+            break;
         }
+
         if (xa < 0) {
-          xa = 0; //start at 0 from left
+          xa = 0;
         }
         int color_code = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
+
         if (color_code != transparentColor) {
           pixels[xa + ya * width] = color_code;
         }
@@ -60,14 +67,17 @@ public class Screen {
 
       for (int x = 0; x < entity.getSprite().getSize(); x++) {
         int xa = x + xp;
+
         if (xa < -entity.getSprite().getSize()
             || xa >= width || ya < 0 || ya >= height) {
-          break; //fix black margins
+          break;
         }
+
         if (xa < 0) {
           xa = 0;
         }
         int color_code = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
+
         if (color_code != transparentColor) {
           pixels[xa + ya * width] = color_code;
         } else {
@@ -99,36 +109,35 @@ public class Screen {
   }
 
   public void drawEndGame(Graphics g, int points) {
-    g.setColor(java.awt.Color.black);
+    g.setColor(Color.black);
     g.fillRect(0, 0, getRealWidth(), getRealHeight());
 
     Font font = new Font("Arial", Font.PLAIN, 24 * Game.SCALE);
     g.setFont(font);
-    g.setColor(java.awt.Color.white);
+    g.setColor(Color.white);
     drawCenteredString("GAME OVER", getRealWidth(), getRealHeight(), g);
 
     font = new Font("Arial", Font.PLAIN, 12 * Game.SCALE);
     g.setFont(font);
-    g.setColor(java.awt.Color.orange);
+    g.setColor(Color.orange);
     drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
   }
 
   public void drawChangeLevel(Graphics g, int level) {
-    g.setColor(java.awt.Color.black);
+    g.setColor(Color.black);
     g.fillRect(0, 0, getRealWidth(), getRealHeight());
 
     Font font = new Font("Arial", Font.PLAIN, 24 * Game.SCALE);
     g.setFont(font);
-    g.setColor(java.awt.Color.white);
+    g.setColor(Color.white);
     drawCenteredString("LEVEL " + level, getRealWidth(), getRealHeight(), g);
   }
 
   public void drawPaused(Graphics g) {
     Font font = new Font("Arial", Font.PLAIN, 24 * Game.SCALE);
     g.setFont(font);
-    g.setColor(java.awt.Color.white);
+    g.setColor(Color.white);
     drawCenteredString("PAUSED", getRealWidth(), getRealHeight(), g);
-
   }
 
   public void drawCenteredString(String s, int w, int h, Graphics g) {

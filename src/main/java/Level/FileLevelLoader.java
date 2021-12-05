@@ -45,7 +45,7 @@ public class FileLevelLoader extends LevelLoader {
       FileReader fr = new FileReader("res\\levels\\" + level + ".txt"); //Đọc file lưu màn chơi
       BufferedReader br = new BufferedReader(fr);
       String line = br.readLine();
-      while (!line.equals("")) {
+      while (line != null) {
         list.add(line);
         line = br.readLine();
       }

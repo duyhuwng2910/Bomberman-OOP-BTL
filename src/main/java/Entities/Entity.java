@@ -9,6 +9,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * Class trừu tượng Entity đại diện cho
+ * toàn bộ các thực thể ở trong game.
+ */
 public abstract class Entity implements Render {
     //Tọa độ X tính từ góc trái trên trong Canvas
     protected double x;
@@ -30,23 +34,24 @@ public abstract class Entity implements Render {
   }
 
   /**
-     * Phương thức render được gọi liên tục trong vòng lặp game
-     * để cập nhật hình ảnh của các entity theo trạng thái.
-     */
-    public abstract void render(Screen screen);
+   * Phương thức render được gọi liên tục trong vòng lặp game
+   * để cập nhật hình ảnh của các entity theo trạng thái.
+   */
+  public abstract void render(Screen screen);
 
-    /**
-     * Phương thức update được gọi liên tục trong vòng lặp game
-     * để xử lý sự kiện và cập nhật trạng thái của toàn bộ Entity.
-     */
-    public abstract void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
+  /**
+   * Phương thức update được gọi liên tục trong vòng lặp game
+   * để xử lý sự kiện và cập nhật trạng thái của toàn bộ Entity.
+   */
+  public abstract void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
-    /**
-     * Phương thức collied dùng để xử lý va chạm của 2 entity.
-     */
-    public abstract boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
+  /**
+   * Phương thức collied dùng để xử lý va chạm của 2 entity.
+   */
+  public abstract boolean collided(Entity entity)
+      throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 
-    public void remove() {
+  public void remove() {
         removed = true;
     }
 

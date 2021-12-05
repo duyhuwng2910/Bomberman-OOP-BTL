@@ -17,8 +17,10 @@ import main.java.Sound.Sound;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * Class trừu tượng cho thực thể Enemy.
+ */
 public abstract class Enemy extends Character {
-
   protected int points;
 
   protected double speed;
@@ -67,10 +69,13 @@ public abstract class Enemy extends Character {
         sprite = deadSprite;
         this.animated = 0;
       } else {
-        sprite = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animated, 60);
+        sprite =
+            Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, animated, 60);
       }
     }
-    screen.renderEntity((int)x, (int)y - sprite.SIZE, this);
+    if (this.sprite != null) {
+      screen.renderEntity((int) x, (int) y - this.sprite.SIZE, this);
+    }
   }
 
   @Override
@@ -120,10 +125,8 @@ public abstract class Enemy extends Character {
 
   @Override
   public boolean canMove(double x, double y) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-    double xr = x, yr = y - 16; //subtract y to get more accurate results
+    double xr = x, yr = y - 16;
 
-    //the thing is, subract 15 to 16 (sprite size), so if we add 1 tile we get the next pixel tile with this
-    //we avoid the shaking inside tiles with the help of steps
     if (direction == 0) {
       yr += sprite.getSize() - 1;
       xr += sprite.getSize() / 2;
@@ -141,11 +144,10 @@ public abstract class Enemy extends Character {
       yr += sprite.getSize()/2;
     }
 
-    int xx = Coordinates.pixelToTile(xr) +(int)x;
-    int yy = Coordinates.pixelToTile(yr) +(int)y;
+    int xx = Coordinates.pixelToTile(xr) + (int)x;
+    int yy = Coordinates.pixelToTile(yr) + (int)y;
 
-    Entity a = board.getEntity(xx, yy, this); //entity of the position we want to go
-
+    Entity a = board.getEntity(xx, yy, this);
     return a.collided(this);
   }
 

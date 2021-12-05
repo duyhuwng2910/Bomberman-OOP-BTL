@@ -190,6 +190,7 @@ public class Game extends Canvas {
   public void pause() {
     paused = true;
   }
+
   public static void setBombRate(int bombRate) {
     Game.bombRate = bombRate;
   }

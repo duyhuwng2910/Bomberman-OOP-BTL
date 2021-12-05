@@ -1,7 +1,5 @@
 package main.java.Entities.staticEntities.Destroyable;
 
-import javafx.scene.image.Image;
-import main.java.Entities.Entity;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 import main.java.Level.Coordinates;

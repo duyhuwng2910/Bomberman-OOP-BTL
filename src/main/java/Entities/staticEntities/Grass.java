@@ -1,8 +1,6 @@
 package main.java.Entities.staticEntities;
 
-import javafx.scene.image.Image;
 import main.java.Entities.Entity;
-import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 
 public class Grass extends Tile {
@@ -11,18 +9,13 @@ public class Grass extends Tile {
         super(x, y, sprite);
     }
 
-    @Override
-    public void render(Screen screen) {
-
-    }
-
-    @Override
-    public void update() {
-
-    }
-
+    /**
+     * thực thể Grass cho phép mọi nhân vật có thể đi qua.
+     * @param entity
+     * @return
+     */
     @Override
     public boolean collided(Entity entity) {
-        return false;
+        return true;
     }
 }

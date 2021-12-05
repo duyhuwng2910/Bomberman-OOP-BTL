@@ -1,7 +1,7 @@
 package main.java.Entities;
 
 import java.awt.Color;
-import javafx.stage.Screen;
+import main.java.Graphics.Screen;
 
 /**
  * Class dùng để hiện thông báo về các sự kiện
@@ -10,11 +10,11 @@ import javafx.stage.Screen;
 public class Notification extends Entity {
   private String notification;
   private int duration;
-  private java.awt.Color color;
+  private Color color;
   private int size;
 
   public Notification(String notification, double x, double y,
-      int duration, java.awt.Color color, int size) {
+      int duration, Color color, int size) {
     this.x = x;
     this.y = y;
     this.notification = notification;
@@ -27,10 +27,6 @@ public class Notification extends Entity {
     return notification;
   }
 
-  public void setNotification(String notification) {
-    this.notification = notification;
-  }
-
   public int getDuration() {
     return duration;
   }
@@ -39,31 +35,19 @@ public class Notification extends Entity {
     this.duration = duration;
   }
 
-  public java.awt.Color getColor() {
+  public Color getColor() {
     return color;
-  }
-
-  public void setColor(Color color) {
-    this.color = color;
   }
 
   public int getSize() {
     return size;
   }
 
-  public void setSize(int size) {
-    this.size = size;
-  }
+  @Override
+  public void render(Screen screen) {}
 
   @Override
-  public void render(main.java.Graphics.Screen screen) {
-
-  }
-
-  @Override
-  public void update() {
-
-  }
+  public void update() {}
 
   @Override
   public boolean collided(Entity entity) {
