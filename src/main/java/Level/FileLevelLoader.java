@@ -50,7 +50,7 @@ public class FileLevelLoader extends LevelLoader {
         line = br.readLine();
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println("Error to open file.");
     }
     String[] arrays = list.get(0).trim().split(" ");
     this.level = Integer.parseInt(arrays[0]);
@@ -104,7 +104,7 @@ public class FileLevelLoader extends LevelLoader {
             Screen.setOffset(0, 0);
             board.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
             break;
-          // Thêm balloon
+          // Thêm balloom
           case '1':
             board.addCharacter(new Balloom(Coordinates.tileToPixel(x),
                 Coordinates.tileToPixel(y) + Game.TILES_SIZE, board));
