@@ -1,5 +1,8 @@
 package main.java.Entities.staticEntities.Destroyable;
 
+import main.java.Entities.Bomb.Flame;
+import main.java.Entities.Entity;
+import main.java.Entities.dynamicEntities.Enemies.Kondoria;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 import main.java.Level.Coordinates;
@@ -26,6 +29,17 @@ public class Brick extends DestroyableTile {
   @Override
   public void update() {
     super.update();
+  }
+
+  @Override
+  public boolean collided(Entity entity) {
+    if (entity instanceof Flame) {
+      destroy();
+    }
+    if (entity instanceof Kondoria) {
+      return true;
+    }
+    return false;
   }
 
 }

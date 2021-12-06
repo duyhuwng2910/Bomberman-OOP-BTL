@@ -33,11 +33,11 @@ public class FileLevelLoader extends LevelLoader {
   }
 
   @Override
-  public void loadLevel(int level) {
+  public void loadLevel(int level) throws LoadLevelException {
     /**
      * đọc dữ liệu từ tệp cấu hình /levels/{level}.txt
      * cập nhật các giá trị đọc được vào bao
-     * gồm width, height, level, map
+     * gồm width, height, level, map.
      */
     List<String> list = new ArrayList<>();
 
@@ -45,107 +45,103 @@ public class FileLevelLoader extends LevelLoader {
       FileReader fr = new FileReader("res\\levels\\" + level + ".txt"); //Đọc file lưu màn chơi
       BufferedReader br = new BufferedReader(fr);
       String line = br.readLine();
+
       while (line != null) {
         list.add(line);
         line = br.readLine();
       }
-    } catch (Exception e) {
-      System.out.println("Error to open file.");
-    }
-    String[] arrays = list.get(0).trim().split(" ");
-    this.level = Integer.parseInt(arrays[0]);
-    this.height = Integer.parseInt(arrays[1]);
-    this.width = Integer.parseInt(arrays[2]);
-    map = new char[height][width];
+      String[] arrays = list.get(0).trim().split(" ");
+      this.level = Integer.parseInt(arrays[0]);
+      this.height = Integer.parseInt(arrays[1]);
+      this.width = Integer.parseInt(arrays[2]);
+      map = new char[height][width];
 
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++) {
-        map[i][j] = list.get(i + 1).charAt(j);
+      for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+          map[i][j] = list.get(i + 1).charAt(j);
+        }
       }
+      br.close();
+    } catch (Exception e) {
+      throw new LoadLevelException("Error loading level " + level, e);
     }
   }
 
   @Override
   public void createEntities() {
-    // TODO: tạo các Entity của màn chơi
-    // TODO: sau khi tạo xong, gọi board.addEntity() để thêm Entity vào game
-
-    // TODO: phần code mẫu ở dưới để hướng dẫn cách thêm các loại Entity vào game
-    // TODO: hãy xóa nó khi hoàn thành chức năng load màn chơi từ tệp cấu hình
-    for (int y = 0; y < getHeight(); y++) {
-      for (int x = 0; x < getWidth(); x++) {
-        int pos = x + y * getWidth();
-        char c = map[y][x];
-        switch (c) {
-          // Thêm Wall
-          case '#':
-            board.addEntity(pos, new Wall(x, y, Sprite.wall));
-            break;
-          // Thêm Portal
-          case 'x':
-            board.addEntity(pos, new LayeredEntity(x, y,
-                new Grass(x, y, Sprite.grass),
-                new Portal(x, y, board, Sprite.portal),
-                new Brick(x, y, Sprite.brick)));
-            break;
-          // Thêm brick
-          case '*':
-            board.addEntity(x + y * width,
-                new LayeredEntity(x, y,
-                    new Grass(x, y, Sprite.grass),
-                    new Brick(x, y, Sprite.brick)
-                )
-            );
-            break;
-          // Thêm Bomber
-          case 'p':
-            board.addCharacter(new Bomber(Coordinates.tileToPixel(x),
-                Coordinates.tileToPixel(y) + Game.TILES_SIZE, board));
-            Screen.setOffset(0, 0);
-            board.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
-            break;
-          // Thêm balloom
-          case '1':
-            board.addCharacter(new Balloom(Coordinates.tileToPixel(x),
-                Coordinates.tileToPixel(y) + Game.TILES_SIZE, board));
-            board.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
-            break;
-          // Thêm oneal
-          case '2':
-            board.addCharacter(new Oneal(Coordinates.tileToPixel(x),
-                Coordinates.tileToPixel(y) + Game.TILES_SIZE, board));
-            board.addEntity(pos, new Grass(x, y, Sprite.grass));
-            break;
-          // Thêm BomItem
-          case 'b':
-            LayeredEntity layer = new LayeredEntity(x, y,
-                new Grass(x, y, Sprite.grass),
-                new BombItems(x, y, Sprite.powerup_bombs),
-                new Brick(x, y, Sprite.brick));
-            board.addEntity(pos, layer);
-            break;
-          // Thêm SpeedItem
-          case 's':
-            layer = new LayeredEntity(x, y,
-                new Grass(x, y, Sprite.grass),
-                new SpeedItems(x, y, Sprite.powerup_speed),
-                new Brick(x, y, Sprite.brick));
-            board.addEntity(pos, layer);
-            break;
-          // Thêm FlameItem
-          case 'f':
-            layer = new LayeredEntity(x, y,
-                new Grass(x, y, Sprite.grass),
-                new FlameItems(x, y, Sprite.powerup_flames),
-                new Brick(x, y, Sprite.brick));
-            board.addEntity(pos, layer);
-            break;
-          // Thêm Grass
-          default:
-            board.addEntity(pos, new Grass(x, y, Sprite.grass));
-            break;
-        }
+    for (int i = 0; i < getHeight(); i++) {
+      for (int j = 0; j < getWidth(); j++) {
+        addLevelEntities(map[i][j], i , j);
       }
+    }
+  }
+
+  public void addLevelEntities(char c, int x, int y) {
+    int pos = x + y * getWidth();
+    switch (c) {
+      // Thêm Wall
+      case '#':
+        board.addEntity(pos, new Wall(x, y, Sprite.wall));
+        break;
+        // Thêm Portal
+      case 'x':
+        board.addEntity(pos, new LayeredEntity(x, y,
+            new Grass(x, y, Sprite.grass), new Portal(x, y, board, Sprite.portal), new Brick(x, y, Sprite.brick)));
+        break;
+        // Thêm brick
+      case '*':
+        board.addEntity(x + y * width, new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Brick(x, y, Sprite.brick)));
+        break;
+        // Thêm Bomber
+      case 'p':
+        board.addCharacter(new Bomber(Coordinates.tileToPixel(x),
+            Coordinates.tileToPixel(y) + Game.TILES_SIZE, board));
+        Screen.setOffset(0, 0);
+        board.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
+        break;
+        // Thêm balloom
+      case '1':
+        board.addCharacter(new Balloom(Coordinates.tileToPixel(x),
+            Coordinates.tileToPixel(y) + Game.TILES_SIZE, board));
+        board.addEntity(x + y * width, new Grass(x, y, Sprite.grass));
+        break;
+        // Thêm oneal
+      case '2':
+        board.addCharacter(new Oneal(Coordinates.tileToPixel(x),
+            Coordinates.tileToPixel(y) + Game.TILES_SIZE, board));
+        board.addEntity(pos, new Grass(x, y, Sprite.grass));
+        break;
+        // Thêm BomItem
+      case 'b':
+        LayeredEntity layer = new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Brick(x, y, Sprite.brick));
+
+        if (!this.board.isItemUsed(x, y, level)) {
+          layer.addBeforeTop(new BombItems(x, y, level, Sprite.powerup_bombs));
+        }
+        board.addEntity(pos, layer);
+        break;
+        // Thêm SpeedItem
+      case 's':
+        layer = new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Brick(x, y, Sprite.brick));
+
+        if (this.board.isItemUsed(x, y, level)) {
+          layer.addBeforeTop(new SpeedItems(x, y, level, Sprite.powerup_speed));
+        }
+        board.addEntity(pos, layer);
+        break;
+        // Thêm FlameItem
+      case 'f':
+        layer = new LayeredEntity(x, y, new Grass(x, y, Sprite.grass), new Brick(x, y, Sprite.brick));
+
+        if (this.board.isItemUsed(x, y, level)) {
+          layer.addBeforeTop(new FlameItems(x, y, level, Sprite.powerup_flames));
+        }
+        board.addEntity(pos, layer);
+        break;
+        // Thêm Grass
+      default:
+        board.addEntity(pos, new Grass(x, y, Sprite.grass));
+        break;
     }
   }
 }

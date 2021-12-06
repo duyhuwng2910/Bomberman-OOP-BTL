@@ -4,15 +4,12 @@ import main.java.Entities.Entity;
 import main.java.Graphics.Sprite;
 
 public class Grass extends Tile {
-
     public Grass(int x, int y, Sprite sprite) {
         super(x, y, sprite);
     }
 
     /**
      * thực thể Grass cho phép mọi nhân vật có thể đi qua.
-     * @param entity
-     * @return
      */
     @Override
     public boolean collided(Entity entity) {

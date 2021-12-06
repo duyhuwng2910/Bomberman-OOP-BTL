@@ -9,7 +9,6 @@ import main.java.Graphics.Sprite;
  * Class đại diện cho các thực thể tĩnh có thể bị phá hủy.
  */
 public class DestroyableTile extends Tile {
-
   private final int MAX_ANIMATE = 7500;
   private int animate = 0;
   protected boolean destroyed = false;

@@ -13,17 +13,24 @@ import main.java.Sound.Sound;
  * Class BombItems.
  */
 public class BombItems extends Items {
-  public BombItems(double x, double y, Sprite sprite) {
-    super(x, y, sprite);
+  public BombItems(double x, double y, int level, Sprite sprite) {
+    super(x, y, level, sprite);
+  }
+
+  @Override
+  public void setValues() {
+    active = true;
+    Game.addBombRate(1);
   }
 
   @Override
   public boolean collided(Entity entity)
       throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (entity instanceof Bomber) {
+      ((Bomber) entity).addItem(this);
       Sound.play("item");
-      Game.addBombRate(1);
       remove();
+      return true;
     }
     return false;
   }

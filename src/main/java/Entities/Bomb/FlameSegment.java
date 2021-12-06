@@ -1,7 +1,9 @@
 package main.java.Entities.Bomb;
 
+import main.java.Board;
 import main.java.Entities.Entity;
 import main.java.Entities.dynamicEntities.Bomber;
+import main.java.Entities.dynamicEntities.Character;
 import main.java.Entities.dynamicEntities.Enemies.Enemy;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
@@ -11,15 +13,19 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public class FlameSegment extends Entity {
-  protected boolean last;
+  protected boolean last = false;
+  protected Board board;
+  protected Sprite sprite1, sprite2;
+
   /**
    * @param last cho biết segment này là cuối cùng của Flame hay không,
    * segment cuối có sprite khác so với các segment còn lại
    */
-  public FlameSegment(int x, int y, int direction, boolean last) {
+  public FlameSegment(int x, int y, int direction, boolean last, Board board) {
     this.x = x;
     this.y = y;
     this.last = last;
+    this.board = board;
 
     switch (direction) {
       case 0:
@@ -57,7 +63,6 @@ public class FlameSegment extends Entity {
   public void render(Screen screen) {
     int xt = (int) this.x << 4;
     int yt = (int) this.y << 4;
-
     screen.renderEntity(xt, yt , this);
   }
 
@@ -67,11 +72,8 @@ public class FlameSegment extends Entity {
   @Override
   public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     // TODO: xử lý khi FlameSegment va chạm với Character
-    if (entity instanceof Bomber) {
-      ((Bomber) entity).kill();
-    }
-    if (entity instanceof Enemy) {
-      ((Enemy) entity).kill();
+    if (entity instanceof Character) {
+      ((Character) entity).kill();
     }
     return true;
   }

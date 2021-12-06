@@ -65,7 +65,7 @@ public class Flame extends Entity {
           x--;
           break;
       }
-      flameSegments[i] = new FlameSegment(x, y, direction, last);
+      flameSegments[i] = new FlameSegment(x, y, direction, last, board);
     }
   }
 

@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.io.IOException;
 
 import main.java.Board;
+import main.java.Entities.Bomb.Flame;
 import main.java.Entities.Entity;
 import main.java.Entities.Notification;
+import main.java.Entities.dynamicEntities.Bomber;
 import main.java.Entities.dynamicEntities.Character;
 import main.java.Entities.dynamicEntities.Enemies.AI_enemies.AI;
 import main.java.Game;
@@ -79,10 +81,6 @@ public abstract class Enemy extends Character {
 
   @Override
   public void calculateMove() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-    // TODO: Tính toán hướng đi và di chuyển Enemy theo _ai và cập nhật giá trị cho _direction
-    // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không
-    // TODO: sử dụng move() để di chuyển
-    // TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
     int xa = 0, ya = 0;
 
     if (steps <= 0) {
@@ -151,8 +149,17 @@ public abstract class Enemy extends Character {
   }
 
   @Override
-  public boolean collided(Entity entity) {
-    return false;
+  public boolean collided(Entity entity)
+      throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    if (entity instanceof Flame) {
+      kill();
+      return false;
+    }
+    if (entity instanceof Bomber) {
+      ((Bomber) entity).kill();
+      return false;
+    }
+    return true;
   }
 
   @Override

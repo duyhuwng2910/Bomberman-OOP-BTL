@@ -11,6 +11,7 @@ import main.java.Entities.Entity;
 import main.java.Entities.Notification;
 import main.java.Entities.Bomb.FlameSegment;
 import main.java.Entities.dynamicEntities.Bomber;
+import main.java.Entities.staticEntities.Items.Items;
 import main.java.Exception.LoadLevelException;
 import main.java.Graphics.Render;
 import main.java.Graphics.Screen;
@@ -31,7 +32,7 @@ public class Board implements Render {
   protected LevelLoader levelLoader;
   protected Game game;
   protected Keyboard input;
-  protected main.java.Graphics.Screen screen;
+  protected Screen screen;
 
   public Entity[] entities;
   public List<Character> characters = new ArrayList<>();
@@ -43,12 +44,13 @@ public class Board implements Render {
 
   private int time = Game.TIME;
   private int points = Game.POINTS;
+  private int lives = Game.LIVES;
 
-  public Board(Game game, Keyboard input, main.java.Graphics.Screen screen) {
+  public Board(Game game, Keyboard input,Screen screen) {
     this.game = game;
     this.input = input;
     this.screen = screen;
-    loadLevel(1);
+    loadLevel(1); // Start at level 1
   }
 
   @Override
@@ -76,11 +78,10 @@ public class Board implements Render {
       return;
     }
 
-    //only render the visible part of screen
-    int x0 = Screen.xOffset >> 4; //tile precision, -> left X
-    int x1 = (Screen.xOffset + screen.getWidth() + Game.TILES_SIZE) / Game.TILES_SIZE; // -> right X
+    int x0 = Screen.xOffset >> 4;
+    int x1 = (Screen.xOffset + screen.getWidth() + Game.TILES_SIZE) / Game.TILES_SIZE;
     int y0 = Screen.yOffset >> 4;
-    int y1 = (Screen.yOffset + screen.getHeight()) / Game.TILES_SIZE; //render one tile plus to fix black margins
+    int y1 = (Screen.yOffset + screen.getHeight()) / Game.TILES_SIZE;
 
     for (int y = y0; y < y1; y++) {
       for (int x = x0; x < x1; x++) {
@@ -92,7 +93,26 @@ public class Board implements Render {
     renderCharacter(screen);
   }
 
+  public void newGame() {
+    points = Game.POINTS;
+    lives = Game.LIVES;
+    Bomber.itemsList.clear();
+
+    Game.setBombRadius(1);
+    Game.setBombRate(1);
+    Game.setBomberSpeed(1.0);
+    loadLevel(1);
+  }
+
+  public void restartLevel() {
+    loadLevel(levelLoader.getLevel());
+  }
+
   public void nextLevel() {
+    points = Game.POINTS;
+    lives = Game.LIVES;
+    Bomber.itemsList.clear();
+
     Game.setBombRadius(1);
     Game.setBombRate(1);
     Game.setBomberSpeed(1.0);
@@ -115,6 +135,17 @@ public class Board implements Render {
     } catch (LoadLevelException e) {
       endGame();
     }
+  }
+
+  public boolean isItemUsed(int x, int y, int level) {
+    Items p;
+    for (int i = 0; i < Bomber.itemsList.size(); i++) {
+      p = Bomber.itemsList.get(i);
+      if (p.getX() == x && p.getY() == y && level == p.getLevel()) {
+        return true;
+      }
+    }
+    return false;
   }
 
   protected void detectEndGame() {
@@ -276,9 +307,7 @@ public class Board implements Render {
       notification = notifications.get(i);
       g.setFont(new Font("Arial", Font.PLAIN, notification.getSize()));
       g.setColor(notification.getColor());
-      g.drawString(notification.getNotification(),
-          (int)notification.getX() - Screen.xOffset  * Game.SCALE,
-          (int)notification.getY());
+      g.drawString(notification.getNotification(), (int)notification.getX() - Screen.xOffset  * Game.SCALE, (int)notification.getY());
     }
   }
 
@@ -292,10 +321,9 @@ public class Board implements Render {
   }
 
   protected void updateCharacters() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-    if(game.isPaused()) {
+    if (game.isPaused()) {
       return;
     }
-
     Iterator<Character> itr = characters.iterator();
 
     while (itr.hasNext() && !game.isPaused()) {
@@ -304,10 +332,9 @@ public class Board implements Render {
   }
 
   protected void updateBombs() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-    if(game.isPaused()) {
+    if (game.isPaused()) {
       return;
     }
-
     Iterator<Bomb> itr = bombs.iterator();
 
     while (itr.hasNext()) {
@@ -334,14 +361,6 @@ public class Board implements Render {
     }
   }
 
-  public int timeSubtraction() {
-    if (game.isPaused()) {
-      return this.time;
-    } else {
-      return this.time--;
-    }
-  }
-
   public Keyboard getInput() {
     return input;
   }
@@ -364,6 +383,22 @@ public class Board implements Render {
 
   public int getTime() {
     return time;
+  }
+
+  public int timeSubtraction() {
+    if (game.isPaused()) {
+      return this.time;
+    } else {
+      return this.time--;
+    }
+  }
+
+  public int getLives() {
+    return lives;
+  }
+
+  public void addLives(int lives) {
+    this.lives += lives;
   }
 
   public int getPoints() {

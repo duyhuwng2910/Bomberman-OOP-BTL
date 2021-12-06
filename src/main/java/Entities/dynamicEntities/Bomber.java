@@ -1,14 +1,15 @@
 package main.java.Entities.dynamicEntities;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import main.java.Board;
 import main.java.Entities.Entity;
-import main.java.Entities.LayeredEntity;
 import main.java.Entities.Bomb.Bomb;
 import main.java.Entities.Bomb.Flame;
+import main.java.Entities.Notification;
 import main.java.Entities.dynamicEntities.Enemies.Enemy;
 import main.java.Entities.staticEntities.Items.Items;
 import main.java.Game;
@@ -36,7 +37,11 @@ public class Bomber extends Character {
     keyboard = board.getInput();
     this.sprite = Sprite.player_right;
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Update & Render
+  |--------------------------------------------------------------------------
+   */
   @Override
   public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     clearBombs();
@@ -45,17 +50,16 @@ public class Bomber extends Character {
       this.afterKilled();
       return;
     }
+
     if (timeBetweenPutBombs < 0) {
       timeBetweenPutBombs = 7500;
     } else {
       timeBetweenPutBombs--;
     }
-
     animate();
     calculateMove();
     detectPlaceOfBombs();
   }
-
 
   @Override
   public void render(Screen screen) {
@@ -75,7 +79,11 @@ public class Bomber extends Character {
     int Scroll = Screen.calculateXOffset(this.board, this);
     Screen.setOffset(Scroll, 0);
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Cac phuong thuc cua qua trinh dat bomb
+  |--------------------------------------------------------------------------
+   */
   private void detectPlaceOfBombs() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if(keyboard.space && Game.getBombRate() > 0 && timeBetweenPutBombs < 0) {
       int xt = Coordinates.pixelToTile(this.x + sprite.getSize() / 2);
@@ -88,9 +96,6 @@ public class Bomber extends Character {
     }
   }
 
-  /**
-   * Phương thức đặt Bomb tại vị trí (x,y).
-   */
   private void placeBomb(int xt, int yt) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     Bomb bomb = new Bomb(xt, yt, this.board);
     board.addBomb(bomb);
@@ -139,7 +144,59 @@ public class Bomber extends Character {
         break;
     }
   }
+  /*
+  |--------------------------------------------------------------------------
+  | Cac ham xu ly va cham va bi tieu diet cua Bomber
+  |--------------------------------------------------------------------------
+   */
+  @Override
+  public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    if (entity instanceof Flame){
+      this.kill();
+      return false;
+    }
+    if (entity instanceof Enemy){
+      this.kill();
+      return true;
+    }
+    return true;
+  }
 
+  @Override
+  public void kill() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    if (!isAlive) {
+      return;
+    } else {
+      isAlive = false;
+      this.board.addLives(-1);
+      Notification notification =
+          new Notification("-1 LIVE", getXNotification(), getYNotification(),
+              2, Color.white, 16);
+      // Hiệu ứng âm thanh khi Bomber bị tiêu diệt
+      Sound.play("endgame");
+    }
+  }
+
+  @Override
+  protected void afterKilled() {
+    if (time_left > 0) {
+      --time_left;
+    } else {
+      if (this.bombList.size() == 0) {
+        if (this.board.getLives() == 0) {
+          this.board.endGame();
+        } else {
+          this.board.restartLevel();
+        }
+      }
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Cac ham thuc hien qua trinh di chuyen cua Bomber
+  |--------------------------------------------------------------------------
+    */
   @Override
   protected boolean canMove(double xa, double ya) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     for (int i = 0; i < 4; i++) {
@@ -193,49 +250,40 @@ public class Bomber extends Character {
     if (ya < 0) {
       direction = 0;
     }
-
-    if (canMove(0, ya)) { //separate the moves for the player can slide when is colliding
+    if (canMove(0, ya)) {
       this.y += ya;
     }
-
     if(canMove(xa, 0)) {
       this.x += xa;
     }
   }
-
-  @Override
-  public void kill() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-    if (!isAlive) {
+  /*
+|--------------------------------------------------------------------------
+| Cac ham thuc hien qua trinh thu nhan item cua Bomber
+|--------------------------------------------------------------------------
+ */
+  public void addItem(Items item) {
+    if(item.isRemoved()) {
       return;
-    } else {
-      isAlive = false;
-      // Hiệu ứng âm thanh khi Bomber bị tiêu diệt
-      Sound.play("endgame");
+    }
+    itemsList.add(item);
+
+    item.setValues();
+  }
+
+  public void clearUsedItem() {
+    Items item;
+    for (int i = 0; i < itemsList.size(); i++) {
+      item = itemsList.get(i);
+      if (!item.isActive()) {
+        itemsList.remove(i);
+      }
     }
   }
 
-  @Override
-  protected void afterKilled() {
-    if (time_left > 0) {
-      --time_left;
-    } else {
-      this.board.endGame();
+  public void removePowerups() {
+    for (int i = 0; i < itemsList.size(); i++) {
+      itemsList.remove(i);
     }
-  }
-
-  @Override
-  public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-    if (entity instanceof Flame){
-      this.kill();
-      return false;
-    }
-    if (entity instanceof Enemy){
-      this.kill();
-      return true;
-    }
-    if (entity instanceof LayeredEntity) {
-      return (entity.collided(this));
-    }
-    return true;
   }
 }

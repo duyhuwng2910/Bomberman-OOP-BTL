@@ -19,7 +19,7 @@ public abstract class Character extends AnimatedEntity {
   protected int direction = -1;
   protected boolean isAlive = true;
   protected boolean isMoving = false;
-  public int time_left = 40;
+  public int time_left = 60;
 
   public Character(double x, double y, Board board) {
     this.x = x;
@@ -63,6 +63,4 @@ public abstract class Character extends AnimatedEntity {
   protected double getYNotification() {
     return (y* Game.SCALE) - (sprite.SIZE / 2 * Game.SCALE);
   }
-
-
 }

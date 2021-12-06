@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 public class Bomb extends AnimatedEntity {
     protected double timeToExplode = 150; //2.5 giây - thời gian phát nổ
-    public int timeAfter = 40;// thời gian sau khi bom nổ
+    public int timeAfter = 30;// thời gian sau khi bom nổ
 
     protected Board board;
     protected Flame[] flames;
@@ -32,6 +32,26 @@ public class Bomb extends AnimatedEntity {
         this.y = y;
         this.board = board;
         this.sprite = Sprite.bomb;
+    }
+
+    @Override
+    public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        if (timeToExplode > 0) {
+            timeToExplode--;
+        } else {
+            if (!exploded) {
+                explode();
+            } else {
+                updateFlames();
+            }
+
+            if (timeAfter > 0) {
+                timeAfter--;
+            } else {
+                remove();
+            }
+        }
+        animate();
     }
 
     @Override
@@ -60,6 +80,10 @@ public class Bomb extends AnimatedEntity {
         }
     }
 
+    public void explodedTime() {
+        timeToExplode = 0;
+    }
+
     /**
      * Phương thức xử lý sự kiện Bomb nổ.
      */
@@ -81,31 +105,6 @@ public class Bomb extends AnimatedEntity {
         }
         // Hiệu ứng âm thanh Bomb nổ
         Sound.play("bom");
-    }
-
-    public void explodedTime() {
-        timeToExplode = 0;
-    }
-
-    @Override
-    public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        if (timeToExplode > 0) {
-            timeToExplode--;
-        } else {
-            if (!exploded) {
-                explode();
-            } else {
-                updateFlames();
-            }
-
-            if (timeAfter > 0) {
-                timeAfter--;
-            } else {
-                remove();
-            }
-        }
-
-        animate();
     }
 
     @Override

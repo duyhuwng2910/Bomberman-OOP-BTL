@@ -8,8 +8,7 @@ import main.java.Exception.LoadLevelException;
  * thông tin bản đồ của các màn chơi.
  */
 public abstract class LevelLoader {
-  protected int width = 20, height = 20; // default values just for testing
-  protected int level;
+  protected int width, height, level;
   protected Board board;
 
   public LevelLoader(Board board, int level) throws LoadLevelException {
@@ -32,5 +31,4 @@ public abstract class LevelLoader {
   public int getLevel() {
     return level;
   }
-
 }

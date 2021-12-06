@@ -10,17 +10,24 @@ import main.java.Graphics.Sprite;
 import main.java.Sound.Sound;
 
 public class SpeedItems extends Items {
-  public SpeedItems(double x, double y, Sprite sprite) {
-    super(x, y, sprite);
+  public SpeedItems(double x, double y, int level, Sprite sprite) {
+    super(x, y, level, sprite);
+  }
+
+  @Override
+  public void setValues() {
+    active = true;
+    Game.addBomberSpeed(0.25);
   }
 
   @Override
   public boolean collided(Entity entity)
       throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (entity instanceof Bomber) {
+      ((Bomber) entity).addItem(this);
       Sound.play("item");
-      Game.addBomberSpeed(0.75);
       remove();
+      return true;
     }
     return false;
   }
