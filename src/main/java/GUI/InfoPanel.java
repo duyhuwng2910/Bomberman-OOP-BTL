@@ -10,6 +10,7 @@ import main.java.Game;
 public class InfoPanel extends JPanel {
   private JLabel timeLabel;
   private JLabel pointsLabel;
+  private JLabel livesLabel;
 
   public InfoPanel(Game game) {
     setLayout(new GridLayout());
@@ -22,11 +23,16 @@ public class InfoPanel extends JPanel {
     pointsLabel.setForeground(Color.white);
     pointsLabel.setHorizontalAlignment(JLabel.CENTER);
 
+    livesLabel = new JLabel("Lives: " + game.getBoard().getLives());
+    livesLabel.setForeground(Color.white);
+    livesLabel.setHorizontalAlignment(JLabel.CENTER);
+
     add(timeLabel);
     add(pointsLabel);
+    add(livesLabel);
 
     setBackground(Color.black);
-    setPreferredSize(new Dimension(0, 40));
+    setPreferredSize(new Dimension(0, 50));
   }
 
   public void setTime(int t) {
@@ -35,5 +41,9 @@ public class InfoPanel extends JPanel {
 
   public void setPoints(int t) {
     pointsLabel.setText("Score: " + t);
+  }
+
+  public void setLives(int t) {
+    livesLabel.setText("Lives: " + t);
   }
 }

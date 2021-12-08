@@ -1,5 +1,6 @@
 package main.java.Level;
 
+import java.util.ArrayList;
 import main.java.Board;
 import main.java.Exception.LoadLevelException;
 
@@ -9,6 +10,7 @@ import main.java.Exception.LoadLevelException;
  */
 public abstract class LevelLoader {
   protected int width, height, level;
+  protected ArrayList<String> lineTiles;
   protected Board board;
 
   public LevelLoader(Board board, int level) throws LoadLevelException {

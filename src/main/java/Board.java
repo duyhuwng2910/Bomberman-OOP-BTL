@@ -39,7 +39,7 @@ public class Board implements Render {
   protected List<Bomb> bombs = new ArrayList<>();
   private List<Notification> notifications = new ArrayList<>();
 
-  //1:endgame, 2:changelevel, 3:paused
+  //1:endGame, 2:nextLevel, 3:paused
   private int screenToShow = -1;
 
   private int time = Game.TIME;
@@ -52,13 +52,16 @@ public class Board implements Render {
     this.screen = screen;
     loadLevel(1); // Start at level 1
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Hàm Render và Update
+  |--------------------------------------------------------------------------
+ */
   @Override
   public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (game.isPaused()) {
       return;
     }
-
     updateEntities();
     updateCharacters();
     updateBombs();
@@ -77,7 +80,6 @@ public class Board implements Render {
     if (game.isPaused()) {
       return;
     }
-
     int x0 = Screen.xOffset >> 4;
     int x1 = (Screen.xOffset + screen.getWidth() + Game.TILES_SIZE) / Game.TILES_SIZE;
     int y0 = Screen.yOffset >> 4;
@@ -88,11 +90,14 @@ public class Board implements Render {
         entities[x + y * levelLoader.getWidth()].render(screen);
       }
     }
-
     renderBombs(screen);
     renderCharacter(screen);
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Các trình bắt đầu vào game
+  |--------------------------------------------------------------------------
+   */
   public void newGame() {
     points = Game.POINTS;
     lives = Game.LIVES;
@@ -109,13 +114,6 @@ public class Board implements Render {
   }
 
   public void nextLevel() {
-    points = Game.POINTS;
-    lives = Game.LIVES;
-    Bomber.itemsList.clear();
-
-    Game.setBombRadius(1);
-    Game.setBombRate(1);
-    Game.setBomberSpeed(1.0);
     loadLevel(levelLoader.getLevel() + 1);
   }
 
@@ -147,7 +145,11 @@ public class Board implements Render {
     }
     return false;
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Qúa trình can thiệp vào game
+  |--------------------------------------------------------------------------
+   */
   protected void detectEndGame() {
     if (time <= 0) {
       endGame();
@@ -170,37 +172,52 @@ public class Board implements Render {
     return total == 0;
   }
 
+  public void gamePause() {
+    game.resetScreenDelay();
+    if(screenToShow <= 0)
+      screenToShow = 3;
+    game.pause();
+  }
+
+  public void gameResume() {
+    game.resetScreenDelay();
+    screenToShow = -1;
+    game.run();
+  }
+
   public void drawScreen(Graphics g) {
     switch (screenToShow) {
       case 1:
         screen.drawEndGame(g, points);
         break;
       case 2:
-        screen.drawChangeLevel(g, levelLoader.getLevel());
+        screen.drawNextLevel(g, levelLoader.getLevel());
         break;
       case 3:
         screen.drawPaused(g);
         break;
     }
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Các hàm getter và setter
+  |--------------------------------------------------------------------------
+   */
   public Entity getEntity(double x, double y, Character m) {
     Entity res = null;
     res = getFlameSegmentAt((int)x, (int)y);
-    if( res != null) {
+
+    if ( res != null) {
       return res;
     }
-
     res = getBombAt(x, y);
-    if( res != null) {
+    if ( res != null) {
       return res;
     }
-
-    res = getCharacterAtExcluding((int)x, (int)y, m);
-    if( res != null) {
+    res = getCharacterAt((int)x, (int)y, m);
+    if ( res != null) {
       return res;
     }
-
     res = getEntityAt((int)x, (int)y);
     return res;
   }
@@ -215,10 +232,10 @@ public class Board implements Render {
 
     while (bomb_list.hasNext()) {
       b = bomb_list.next();
-      if(b.getX() == (int)x && b.getY() == (int)y)
+      if (b.getX() == (int) x && b.getY() == (int) y) {
         return b;
+      }
     }
-
     return null;
   }
 
@@ -228,20 +245,21 @@ public class Board implements Render {
 
     while (itr.hasNext()) {
       cur = itr.next();
-      if(cur instanceof Bomber)
+      if (cur instanceof Bomber) {
         return (Bomber) cur;
+        }
     }
-
     return null;
   }
 
-  public Character getCharacterAtExcluding(int x, int y, Character a) {
+  public Character getCharacterAt(int x, int y, Character a) {
     Iterator<Character> itr = characters.iterator();
     Character cur;
 
     while (itr.hasNext()) {
       cur = itr.next();
-      if (cur == a) {
+
+      if(cur == a) {
         continue;
       }
       if (cur.getXTile() == x && cur.getYTile() == y) {
@@ -263,14 +281,17 @@ public class Board implements Render {
         return e;
       }
     }
-
     return null;
   }
 
   public Entity getEntityAt(double x, double y) {
     return entities[(int)x + (int)y * levelLoader.getWidth()];
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Các hàm thêm và xóa thực thể, thông báo...
+  |--------------------------------------------------------------------------
+   */
   public void addEntity(int pos, Entity entity) {
     entities[pos] = entity;
   }
@@ -286,7 +307,11 @@ public class Board implements Render {
   public void addNotification(Notification notification) {
     notifications.add(notification);
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Các hàm render thực thể, thông báo...
+  |--------------------------------------------------------------------------
+   */
   protected void renderCharacter(Screen screen) {
     Iterator<Character> itr = characters.iterator();
     while (itr.hasNext()) {
@@ -310,7 +335,11 @@ public class Board implements Render {
       g.drawString(notification.getNotification(), (int)notification.getX() - Screen.xOffset  * Game.SCALE, (int)notification.getY());
     }
   }
-
+  /*
+  |--------------------------------------------------------------------------
+  | Các hàm update thực thể, thông báo...
+  |--------------------------------------------------------------------------
+   */
   protected void updateEntities() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
     if (game.isPaused()) {
       return;
@@ -393,14 +422,6 @@ public class Board implements Render {
     }
   }
 
-  public int getLives() {
-    return lives;
-  }
-
-  public void addLives(int lives) {
-    this.lives += lives;
-  }
-
   public int getPoints() {
     return points;
   }
@@ -409,11 +430,15 @@ public class Board implements Render {
     this.points += points;
   }
 
-  public int getWidth() {
-    return levelLoader.getWidth();
+  public int getLives() {
+    return lives;
   }
 
-  public int getHeight() {
-    return levelLoader.getHeight();
+  public void addLives(int lives) {
+    this.lives += lives;
+  }
+
+  public int getWidth() {
+    return levelLoader.getWidth();
   }
 }

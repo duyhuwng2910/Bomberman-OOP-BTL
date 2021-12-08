@@ -123,7 +123,7 @@ public class Screen {
     drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
   }
 
-  public void drawChangeLevel(Graphics g, int level) {
+  public void drawNextLevel(Graphics g, int level) {
     g.setColor(Color.black);
     g.fillRect(0, 0, getRealWidth(), getRealHeight());
 

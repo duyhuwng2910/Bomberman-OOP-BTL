@@ -6,6 +6,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import main.java.GUI.menu.Menu;
 import main.java.Game;
 
 public class Frame extends JFrame {
@@ -16,6 +17,7 @@ public class Frame extends JFrame {
   private Game game;
 
   public Frame() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    setJMenuBar(new Menu(this));
     jPanel = new JPanel(new BorderLayout());
     gamePanel = new GamePanel(this);
     infoPanel = new InfoPanel(gamePanel.getGame());
@@ -26,14 +28,20 @@ public class Frame extends JFrame {
     game = gamePanel.getGame();
 
     add(jPanel);
-
     setResizable(false);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     pack();
     setLocationRelativeTo(null);
     setVisible(true);
-
     game.start();
+  }
+
+  public void pauseGame() {
+    game.getBoard().gamePause();
+  }
+
+  public void resumeGame() {
+    game.getBoard().gameResume();
   }
 
   public void setTime(int time) {
@@ -42,5 +50,9 @@ public class Frame extends JFrame {
 
   public void setPoints(int points) {
     infoPanel.setPoints(points);
+  }
+
+  public void setLives(int lives) {
+    infoPanel.setLives(lives);
   }
 }

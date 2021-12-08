@@ -35,7 +35,8 @@ public class Bomb extends AnimatedEntity {
     }
 
     @Override
-    public void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void update() throws
+        UnsupportedAudioFileException, LineUnavailableException, IOException {
         if (timeToExplode > 0) {
             timeToExplode--;
         } else {
@@ -93,7 +94,7 @@ public class Bomb extends AnimatedEntity {
 
         // Tiến hành xử lý sự kiện khi Character
         // đứng trong khu vực chịu ảnh hưởng của Bomb
-        Character character = board.getCharacterAtExcluding((int) this.x, (int) this.y, null);
+        Character character = board.getCharacterAt((int) this.x, (int) this.y, null);
 
         if (character != null) {
             character.kill();

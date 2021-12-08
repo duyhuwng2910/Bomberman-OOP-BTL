@@ -39,7 +39,6 @@ public class FileLevelLoader extends LevelLoader {
      * cập nhật các giá trị đọc được vào bao
      * gồm width, height, level, map.
      */
-    List<String> list = new ArrayList<>();
 
     try {
       FileReader fr = new FileReader("res\\levels\\" + level + ".txt"); //Đọc file lưu màn chơi
@@ -47,20 +46,14 @@ public class FileLevelLoader extends LevelLoader {
       String line = br.readLine();
 
       while (line != null) {
-        list.add(line);
+        lineTiles.add(line);
         line = br.readLine();
       }
-      String[] arrays = list.get(0).trim().split(" ");
+      String[] arrays = lineTiles.get(0).trim().split(" ");
       this.level = Integer.parseInt(arrays[0]);
       this.height = Integer.parseInt(arrays[1]);
       this.width = Integer.parseInt(arrays[2]);
-      map = new char[height][width];
 
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-          map[i][j] = list.get(i + 1).charAt(j);
-        }
-      }
       br.close();
     } catch (Exception e) {
       throw new LoadLevelException("Error loading level " + level, e);
@@ -69,15 +62,15 @@ public class FileLevelLoader extends LevelLoader {
 
   @Override
   public void createEntities() {
-    for (int i = 0; i < getHeight(); i++) {
-      for (int j = 0; j < getWidth(); j++) {
-        addLevelEntities(map[i][j], i , j);
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        addLevelEntities(lineTiles.get(i + 1).charAt(j), i, j);
       }
     }
   }
 
   public void addLevelEntities(char c, int x, int y) {
-    int pos = x + y * getWidth();
+    int pos = x + y * width;
     switch (c) {
       // Thêm Wall
       case '#':

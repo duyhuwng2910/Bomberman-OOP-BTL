@@ -24,7 +24,7 @@ public class Game extends Canvas {
 
   private static final int BOMB_RATE = 1;
   private static final int BOMB_RADIUS = 1;
-  private static final double BOMBER_SPEED = 1.0;//toc do bomber
+  private static final double BOMBER_SPEED = 1.0;// tốc độ ban đầu của Bomber
 
   public static final int TIME = 200;
   public static final int POINTS = 0;
@@ -36,16 +36,15 @@ public class Game extends Canvas {
   protected static int bombRadius = BOMB_RADIUS;
   protected static double bomberSpeed = BOMBER_SPEED;
 
-
   protected int screenDelay = SCREEN_DELAY;
 
-  private Keyboard input;
+  private Keyboard keyboard;
   private boolean running = false;
   private boolean paused = true;
 
   private Board board;
   private Screen screen;
-  private main.java.GUI.Frame frame;
+  private Frame frame;
 
   private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
   private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -54,10 +53,10 @@ public class Game extends Canvas {
     this.frame = frame;
     this.frame.setTitle(TITLE);
     this.screen = new Screen(WIDTH, HEIGHT);
-    this.input = new Keyboard();
-    board = new Board(this, input, screen);
+    this.keyboard = new Keyboard();
+    board = new Board(this, keyboard, screen);
+    addKeyListener(keyboard);
   }
-
 
   private void renderGame() {
     BufferStrategy bs = getBufferStrategy();
@@ -89,16 +88,14 @@ public class Game extends Canvas {
       return;
     }
     screen.clear();
-
     Graphics g = bs.getDrawGraphics();
     board.drawScreen(g);
-
     g.dispose();
     bs.show();
   }
 
   private void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-    input.update();
+    keyboard.update();
     board.update();
   }
 
@@ -106,11 +103,8 @@ public class Game extends Canvas {
     running = true;
     long lastTime = System.nanoTime();
     long timer = System.currentTimeMillis();
-    final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second
+    final double ns = 1000000000.0 / 60.0;
     double delta = 0;
-    int frames = 0;
-    int updates = 0;
-
     requestFocus();
 
     while (running) {
@@ -120,9 +114,9 @@ public class Game extends Canvas {
 
       while (delta >= 1) {
         update();
-        updates++;
         delta--;
       }
+
       if (paused) {
         if (screenDelay <= 0) {
           board.setShow(-1);
@@ -132,18 +126,12 @@ public class Game extends Canvas {
       } else {
         renderGame();
       }
-      frames++;
 
       if (System.currentTimeMillis() - timer > 1000) {
         frame.setTime(board.timeSubtraction());
         frame.setPoints(board.getPoints());
-
+        frame.setLives(board.getLives());
         timer += 1000;
-
-        frame.setTitle(TITLE + " | " + updates + " rate, " + frames + " fps");
-
-        updates = 0;
-        frames = 0;
 
         if (board.getShow() == 2) {
           --screenDelay;
@@ -156,24 +144,36 @@ public class Game extends Canvas {
     return bomberSpeed;
   }
 
-  public static int getBombRate() {
-    return bombRate;
-  }
-
-  public static int getBombRadius() {
-    return bombRadius;
+  public static void setBomberSpeed(double bomberSpeed) {
+    Game.bomberSpeed = bomberSpeed;
   }
 
   public static void addBomberSpeed(double i) {
     bomberSpeed += i;
   }
 
-  public static void addBombRadius(int i) {
-    bombRadius += i;
+  public static int getBombRate() {
+    return bombRate;
+  }
+
+  public static void setBombRate(int bombRate) {
+    Game.bombRate = bombRate;
   }
 
   public static void addBombRate(int i) {
     bombRate += i;
+  }
+
+  public static int getBombRadius() {
+    return bombRadius;
+  }
+
+  public static void setBombRadius(int bombRadius) {
+    Game.bombRadius = bombRadius;
+  }
+
+  public static void addBombRadius(int i) {
+    bombRadius += i;
   }
 
   public void resetScreenDelay() {
@@ -184,23 +184,16 @@ public class Game extends Canvas {
     return board;
   }
 
-  public boolean isPaused() {
-    return paused;
-  }
-
   public void pause() {
     paused = true;
   }
 
-  public static void setBombRate(int bombRate) {
-    Game.bombRate = bombRate;
+  public boolean isPaused() {
+    return paused;
   }
 
-  public static void setBombRadius(int bombRadius) {
-    Game.bombRadius = bombRadius;
-  }
-
-  public static void setBomberSpeed(double bomberSpeed) {
-    Game.bomberSpeed = bomberSpeed;
+  public void run() {
+    running = true;
+    paused = false;
   }
 }

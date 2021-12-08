@@ -12,11 +12,8 @@ public class GamePanel extends JPanel {
     setLayout(new BorderLayout());
     setPreferredSize(new Dimension(Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE));
     game = new Game(frame);
-
     add(game);
-
     game.setVisible(true);
-
     setVisible(true);
     setFocusable(true);
   }

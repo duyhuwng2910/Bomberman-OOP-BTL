@@ -7,9 +7,9 @@ import main.java.Graphics.Sprite;
 
 public class Minvo extends Enemy {
   public Minvo(int x, int y, Board board) {
-    super(x, y, board, Sprite.minvo_dead, Game.getPlayerSpeed() * 2, 800);
+    super(x, y, board, Sprite.minvo_dead, Game.getBomberSpeed() * 2, 800);
     sprite = Sprite.minvo_right1;
-    ai = new AIIntermediate(board.getPlayer(), this);
+    ai = new AIIntermediate(board.getBomber(), this);
     direction  = ai.calculateDirection();
   }
 
