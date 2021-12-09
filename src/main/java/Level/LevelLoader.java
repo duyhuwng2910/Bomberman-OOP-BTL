@@ -1,36 +1,34 @@
 package main.java.Level;
 
-import java.util.ArrayList;
 import main.java.Board;
 import main.java.Exception.LoadLevelException;
 
-/**
- * Class dùng để load và lưu trữ
- * thông tin bản đồ của các màn chơi.
- */
-public abstract class LevelLoader {
-  protected int width, height, level;
-  protected ArrayList<String> lineTiles;
-  protected Board board;
+public abstract class LevelLoader implements ILevel {
 
-  public LevelLoader(Board board, int level) throws LoadLevelException {
-    this.board = board;
-    loadLevel(level);
-  }
+	protected int width, height, level;
+	protected String[] lineTiles;
+	protected Board board;
 
-  public abstract void loadLevel(int level) throws LoadLevelException;
+	public LevelLoader(String path, Board board) throws LoadLevelException {
+		loadLevel(path);
+		this.board = board;
+	}
 
-  public abstract void createEntities();
+	@Override
+	public abstract void loadLevel(String path) throws LoadLevelException;
+	
+	public abstract void createEntities();
 
-  public int getWidth() {
-    return width;
-  }
+	public int getWidth() {
+		return width;
+	}
 
-  public int getHeight() {
-    return height;
-  }
+	public int getHeight() {
+		return height;
+	}
 
-  public int getLevel() {
-    return level;
-  }
+	public int getLevel() {
+		return level;
+	}
+
 }

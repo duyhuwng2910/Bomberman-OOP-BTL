@@ -4,8 +4,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
-public interface Render {
-  void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
+public interface IRender {
 
-  void render(Screen screen);
+	void update() throws UnsupportedAudioFileException, LineUnavailableException, IOException;
+	
+	void render(Screen screen);
 }
