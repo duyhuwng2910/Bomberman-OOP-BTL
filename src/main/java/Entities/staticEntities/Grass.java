@@ -12,7 +12,7 @@ public class Grass extends Tile {
     }
 
     @Override
-    public boolean collide(Entity entity) {
+    public boolean collided(Entity entity) {
         return true;
     }
 }

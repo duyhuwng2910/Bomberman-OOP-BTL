@@ -4,7 +4,6 @@ import main.java.Entities.Entity;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 import main.java.Level.Coordinates;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
@@ -20,7 +19,7 @@ public abstract class Tile extends Entity {
 	}
 	
 	@Override
-	public boolean collide(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+	public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 		return false;
 	}
 	

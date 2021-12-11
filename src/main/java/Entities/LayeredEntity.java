@@ -2,10 +2,8 @@ package main.java.Entities;
 
 import java.io.IOException;
 import java.util.LinkedList;
-
 import main.java.Entities.staticEntities.Destroyable.DestroyableTile;
 import main.java.Graphics.Screen;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -14,7 +12,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * Ví dụ: tại vị trí có chứa item flash, có 3 entity [Grass, flashItem, Brick]
  */
 public class LayeredEntity extends Entity {
-    protected LinkedList<Entity> entityLinkedList = new LinkedList<Entity>();
+    protected LinkedList<Entity> entityLinkedList = new LinkedList<>();
 
     public LayeredEntity(int x, int y, Entity... entities) {
         this.x = x;
@@ -22,7 +20,6 @@ public class LayeredEntity extends Entity {
 
         for (int i = 0; i < entities.length; i++) {
             entityLinkedList.add(entities[i]);
-
             if (i > 1) {
                 if (entities[i] instanceof DestroyableTile) {
                     ((DestroyableTile) entities[i]).addBelowSprite(entities[i - 1].getSprite());
@@ -43,7 +40,6 @@ public class LayeredEntity extends Entity {
     }
 
     public Entity getTopEntity() {
-
         return entityLinkedList.getLast();
     }
 
@@ -59,8 +55,8 @@ public class LayeredEntity extends Entity {
     }
 
     @Override
-    public boolean collide(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        return getTopEntity().collide(entity);
+    public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        return getTopEntity().collided(entity);
     }
 
 }

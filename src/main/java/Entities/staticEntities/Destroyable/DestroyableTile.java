@@ -5,12 +5,15 @@ import main.java.Entities.Bomb.Flame;
 import main.java.Entities.staticEntities.Tile;
 import main.java.Graphics.Sprite;
 
+/**
+ * Class đại diện cho các thực thể tĩnh
+ * có thể bị phá hủy.
+ */
 public class DestroyableTile extends Tile {
-
     private final int MAX_ANIMATE = 7500;
     private int animate = 0;
     protected boolean destroyed = false;
-    protected int timeToDisapear = 20;
+    protected int timeToDisappear = 20;
     protected Sprite belowSprite = Sprite.grass;
 
     public DestroyableTile(int x, int y, Sprite sprite) {
@@ -25,8 +28,8 @@ public class DestroyableTile extends Tile {
             } else {
                 animate = 0;
             }
-            if (timeToDisapear > 0) {
-                timeToDisapear--;
+            if (timeToDisappear > 0) {
+                timeToDisappear--;
             } else {
                 remove();
             }
@@ -38,7 +41,7 @@ public class DestroyableTile extends Tile {
     }
 
     @Override
-    public boolean collide(Entity entity) {
+    public boolean collided(Entity entity) {
         if (entity instanceof Flame) {
             destroy();
         }
@@ -55,11 +58,9 @@ public class DestroyableTile extends Tile {
         if (calc < 10) {
             return normal;
         }
-
         if (calc < 20) {
             return x1;
         }
-
         return x2;
     }
 }

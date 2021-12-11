@@ -29,9 +29,9 @@ public class Flame extends Entity {
 		this.direction = direction;
 		this.radius = radius;
 		this.board = board;
-		flameSegments = new FlameSegment[ calculatePermitedDistance() ]; //tính toán độ dài Flame, tương ứng với số lượng segment.
+		flameSegments = new FlameSegment[calculatePermittedDistance()]; //tính toán độ dài Flame, tương ứng với số lượng segment.
 		createFlameSegments();
-		}
+	}
 
 	/**
 	 * Phương thức tạo các FlameSegment,
@@ -42,7 +42,7 @@ public class Flame extends Entity {
 		int x = (int) this.x;
 		int y = (int) this.y;
 		for (int i = 0; i < flameSegments.length; i++) {
-			last = i == flameSegments.length -1 ? true : false;
+			last = i == flameSegments.length - 1;
 			
 			switch (direction) {
 				case 0:
@@ -68,34 +68,41 @@ public class Flame extends Entity {
 	 * Phương thức dùng để tính toán độ dài của Flame,
 	 * nếu gặp vật cản là Brick/Wall thì độ dài sẽ bị cắt ngắn.
 	 */
-	private int calculatePermitedDistance() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+	private int calculatePermittedDistance() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 		int radius = 0;
 		int x = (int) this.x;
 		int y = (int) this.y;
-		while(radius < this.radius) {
-			if(direction == 0) y--;
-			if(direction == 1) x++;
-			if(direction == 2) y++;
-			if(direction == 3) x--;
-			
+
+		while (radius < this.radius) {
+			if (direction == 0) {
+				y--;
+			}
+			if (direction == 1) {
+				x++;
+			}
+			if (direction == 2) {
+				y++;
+			}
+			if (direction == 3) {
+				x--;
+			}
 			Entity entity = board.getEntity(x, y, null);
 			
-			if(entity instanceof Character) {
+			if (entity instanceof Character) {
 				++radius;
 			}
 			
-			if(entity.collide(this) == false) {
+			if (!entity.collided(this)) {
 				break;
 			}
-			
 			++radius;
 		}
 		return radius;
 	}
 	
-	public FlameSegment explosionAt(int x, int y) {
+	public FlameSegment flameSegmentAt(int x, int y) {
 		for (int i = 0; i < flameSegments.length; i++) {
-			if(flameSegments[i].getX() == x && flameSegments[i].getY() == y) {
+			if (flameSegments[i].getX() == x && flameSegments[i].getY() == y) {
 				return flameSegments[i];
 			}
 		}
@@ -107,19 +114,18 @@ public class Flame extends Entity {
 	
 	@Override
 	public void render(Screen screen) {
-		
 		for (int i = 0; i < flameSegments.length; i++) {
 			flameSegments[i].render(screen);
 		}
 	}
 
 	@Override
-	public boolean collide(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-		// TODO: xử lý va chạm với Bomber, Enemy. Chú ý đối tượng này có vị trí chính là vị trí của Bomb đã nổ
-		if(entity instanceof Bomber) {
+	public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+		// xử lý va chạm với Bomber, Enemy. Chú ý đối tượng này có vị trí chính là vị trí của Bomb đã nổ
+		if (entity instanceof Bomber) {
 			((Bomber) entity).kill();
 		}
-		if(entity instanceof Enemy) {
+		if (entity instanceof Enemy) {
 			((Enemy) entity).kill();
 		}
 		return true;

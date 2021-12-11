@@ -8,7 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import javax.sound.sampled.*;
 
-
+/**
+ * Class Sound thực hiện quá trình
+ * phát và dừng nhạc.
+ */
 public class Sound {
     public static void play(String sound) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
         File file = new File ( "./res/sound/"+ sound + ".wav");

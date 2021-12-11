@@ -13,7 +13,7 @@ import main.java.Entities.dynamicEntities.Bomber;
 public class Screen {
     protected int width, height;
     public int[] pixels;
-    private int transparentColor = 0xffff00ff;
+    protected int transparentColor = 0xffff00ff;
 
     public static int xOffset = 0, yOffset = 0;
 
@@ -100,7 +100,7 @@ public class Screen {
     /*
     *Màn hình trò chơi.
      */
-    public void drawEndGame(Graphics g, int points, String code) {
+    public void drawEndGame(Graphics g, int points) {
         g.setColor(Color.black);
         g.fillRect(0, 0, getRealWidth(), getRealHeight());
 
@@ -113,12 +113,6 @@ public class Screen {
         g.setFont(font);
         g.setColor(Color.yellow);
         drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
-
-
-        font = new Font("Arial", Font.PLAIN, 10 * Game.SCALE);
-        g.setFont(font);
-        g.setColor(Color.GRAY);
-        drawCenteredString(code, getRealWidth(), getRealHeight() * 2 - (Game.TILES_SIZE * 2) * Game.SCALE, g);
     }
 
     public void drawChangeLevel(Graphics g, int level) {

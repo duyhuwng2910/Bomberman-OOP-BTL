@@ -10,8 +10,11 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * Class đại diện cho cổng portal khi Bomber
+ * tiêu diệt sẽ đi qua để đến level tiếp theo.
+ */
 public class Portal extends Tile {
-
 	protected Board board;
 	
 	public Portal(int x, int y, Board board, Sprite sprite) {
@@ -23,15 +26,14 @@ public class Portal extends Tile {
 	 * @return true cho đi qua, false không cho đi qua.
 	 */
 	@Override
-	public boolean collide(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+	public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 		// xử lý khi Bomber đi vào
-		if(entity instanceof Bomber) {
-			
-			if(!board.detectNoEnemies())
-				return false;
-			
-			if(entity.getXTile() == getX() && entity.getYTile() == getY()) {
-				if(board.detectNoEnemies()) {
+		if (entity instanceof Bomber) {
+      if (!board.detectNoEnemies()) {
+        return false;
+			}
+			if (entity.getXTile() == getX() && entity.getYTile() == getY()) {
+				if (board.detectNoEnemies()) {
 					board.nextLevel();
 					Sound.play("crystup");
 				}

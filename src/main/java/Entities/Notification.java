@@ -1,20 +1,22 @@
 package main.java.Entities;
 
 import java.awt.Color;
-
 import main.java.Graphics.Screen;
 
+/**
+ * Class đại diện cho các thông báo sự kiện
+ * trong quá trình game chạy.
+ */
 public class Notification extends Entity {
-
 	protected String notification;
 	protected int duration;
 	protected Color color;
 	protected int size;
 	
-	public Notification(String message, double x, double y, int duration, Color color, int size) {
+	public Notification(String notification, double x, double y, int duration, Color color, int size) {
 		this.x =x;
 		this.y = y;
-		notification = message;
+		this.notification = notification;
 		this.duration = duration * 60;
 		this.color = color;
 		this.size = size;
@@ -28,7 +30,7 @@ public class Notification extends Entity {
 		this.duration = duration;
 	}
 
-	public String getMessage() {
+	public String getNotification() {
 		return notification;
 	}
 
@@ -41,17 +43,13 @@ public class Notification extends Entity {
 	}
 
 	@Override
-	public void update() {
-	}
+	public void update() {}
 
 	@Override
-	public void render(Screen screen) {
-	}
+	public void render(Screen screen) {}
 
 	@Override
-	public boolean collide(Entity e) {
+	public boolean collided(Entity e) {
 		return true;
 	}
-	
-	
 }

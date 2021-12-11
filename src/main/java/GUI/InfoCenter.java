@@ -4,28 +4,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+/**
+ * Class đại diện cho các hình ảnh liên quan đến thông tin
+ * của game, bao gồm thời gian, số điểm, số mạng còn lại.
+ */
 public class InfoCenter implements WindowListener {
-
 		private Frame frame;
 	
 	  public InfoCenter(Frame frame, String title, String message, int option) {
 		  this.frame = frame;
-		  
 		  final JFrame center = new JFrame(title);
-	        final JButton button = new JButton("FLEX");
-	        button.addActionListener(new ActionListener() {
-	            @Override
+			final JButton button = new JButton("GOT IT");
+			button.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent actionEvent)
 	            {  
 	                center.dispose();
-	            }  
-	        });  
-	        
+	            }});
 	        JButton[] buttons = { button };  
 	        JOptionPane optionPane = new JOptionPane(message, option, 0, null, buttons, button);
 	        center.getContentPane().add(optionPane);
@@ -65,5 +64,4 @@ public class InfoCenter implements WindowListener {
 	@Override
 	public void windowDeactivated(WindowEvent windowEvent) {
 	}
-
 }

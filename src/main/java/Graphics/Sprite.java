@@ -4,7 +4,6 @@ package main.java.Graphics;
  * Lưu trữ thông tin các pixel của 1 sprite (hình ảnh game)
  */
 public class Sprite {
-
     public final int SIZE;
     private int x, y;
     public int[] pixels;
@@ -20,8 +19,8 @@ public class Sprite {
     public static Sprite wall = new Sprite(16, 5, 0, SpriteSheet.tiles, 16, 16);
     public static Sprite portal = new Sprite(16, 4, 0, SpriteSheet.tiles, 14, 14);
 
-    /*
-     *Player Sprites
+    /**
+     * Player Sprites
      */
     public static Sprite player_up = new Sprite(16, 0, 0, SpriteSheet.tiles, 12, 16);
     public static Sprite player_down = new Sprite(16, 2, 0, SpriteSheet.tiles, 12, 15);
@@ -44,10 +43,11 @@ public class Sprite {
     public static Sprite player_dead2 = new Sprite(16, 5, 2, SpriteSheet.tiles, 13, 15);
     public static Sprite player_dead3 = new Sprite(16, 6, 2, SpriteSheet.tiles, 16, 16);
 
-    /*
-     * Enemis
+    /**
+     * Enemies
      */
-    //BALLOM
+
+    //BALLOOM
     public static Sprite balloom_left1 = new Sprite(16, 9, 0, SpriteSheet.tiles, 16, 16);
     public static Sprite balloom_left2 = new Sprite(16, 9, 1, SpriteSheet.tiles, 16, 16);
     public static Sprite balloom_left3 = new Sprite(16, 9, 2, SpriteSheet.tiles, 16, 16);
@@ -69,7 +69,7 @@ public class Sprite {
 
     public static Sprite oneal_dead = new Sprite(16, 11, 3, SpriteSheet.tiles, 16, 16);
 
-    //Doll
+    //DOLL
     public static Sprite doll_left1 = new Sprite(16, 13, 0, SpriteSheet.tiles, 16, 16);
     public static Sprite doll_left2 = new Sprite(16, 13, 1, SpriteSheet.tiles, 16, 16);
     public static Sprite doll_left3 = new Sprite(16, 13, 2, SpriteSheet.tiles, 16, 16);
@@ -80,7 +80,7 @@ public class Sprite {
 
     public static Sprite doll_dead = new Sprite(16, 13, 3, SpriteSheet.tiles, 16, 16);
 
-    //Minvo
+    //MINVO
     public static Sprite minvo_left1 = new Sprite(16, 8, 5, SpriteSheet.tiles, 16, 16);
     public static Sprite minvo_left2 = new Sprite(16, 8, 6, SpriteSheet.tiles, 16, 16);
     public static Sprite minvo_left3 = new Sprite(16, 8, 7, SpriteSheet.tiles, 16, 16);
@@ -91,7 +91,7 @@ public class Sprite {
 
     public static Sprite minvo_dead = new Sprite(16, 8, 8, SpriteSheet.tiles, 16, 16);
 
-    //Kondoria
+    //KONDORIA
     public static Sprite kondoria_left1 = new Sprite(16, 10, 5, SpriteSheet.tiles, 16, 16);
     public static Sprite kondoria_left2 = new Sprite(16, 10, 6, SpriteSheet.tiles, 16, 16);
     public static Sprite kondoria_left3 = new Sprite(16, 10, 7, SpriteSheet.tiles, 16, 16);
@@ -107,15 +107,15 @@ public class Sprite {
     public static Sprite mob_dead2 = new Sprite(16, 15, 1, SpriteSheet.tiles, 16, 16);
     public static Sprite mob_dead3 = new Sprite(16, 15, 2, SpriteSheet.tiles, 16, 16);
 
-    /*
-     *Bomb Sprites
+    /**
+     * Bomb Sprites
      */
     public static Sprite bomb = new Sprite(16, 0, 3, SpriteSheet.tiles, 15, 15);
     public static Sprite bomb_1 = new Sprite(16, 1, 3, SpriteSheet.tiles, 13, 15);
     public static Sprite bomb_2 = new Sprite(16, 2, 3, SpriteSheet.tiles, 12, 14);
 
-    /*
-     *Flame Sprites
+    /**
+     * Flame Sprites
      */
     public static Sprite bomb_exploded = new Sprite(16, 0, 4, SpriteSheet.tiles, 16, 16);
     public static Sprite bomb_exploded1 = new Sprite(16, 0, 5, SpriteSheet.tiles, 16, 16);
@@ -145,15 +145,15 @@ public class Sprite {
     public static Sprite explosion_vertical_down_last1 = new Sprite(16, 2, 6, SpriteSheet.tiles, 16, 16);
     public static Sprite explosion_vertical_down_last2 = new Sprite(16, 3, 6, SpriteSheet.tiles, 16, 16);
 
-    /*
+    /**
      * Brick Explosion
      */
     public static Sprite brick_exploded = new Sprite(16, 7, 1, SpriteSheet.tiles, 16, 16);
     public static Sprite brick_exploded1 = new Sprite(16, 7, 2, SpriteSheet.tiles, 16, 16);
     public static Sprite brick_exploded2 = new Sprite(16, 7, 3, SpriteSheet.tiles, 16, 16);
 
-    /*
-     *Powerups
+    /**
+     * Item
      */
     public static Sprite bombs = new Sprite(16, 0, 10, SpriteSheet.tiles, 16, 16);
     public static Sprite flames = new Sprite(16, 1, 10, SpriteSheet.tiles, 16, 16);
@@ -201,11 +201,9 @@ public class Sprite {
         if (calc < diff) {
             return normal;
         }
-
         if (calc < diff * 2) {
             return x1;
         }
-
         return x2;
     }
 
@@ -218,20 +216,7 @@ public class Sprite {
         return SIZE;
     }
 
-    public int[] getPixels() {
-        return pixels;
-    }
-
     public int getPixel(int i) {
         return pixels[i];
     }
-
-    public int getRealWidth() {
-        return realWidth;
-    }
-
-    public int getRealHeight() {
-        return realHeight;
-    }
-
 }

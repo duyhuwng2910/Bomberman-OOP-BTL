@@ -5,11 +5,13 @@ import main.java.Entities.Entity;
 import main.java.Entities.dynamicEntities.Bomber;
 import main.java.Graphics.Sprite;
 import main.java.Sound.Sound;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
+/**
+ * Class đại diện cho item Bomb.
+ */
 public class BombItems extends Items {
 
 	public BombItems(int x, int y, int level, Sprite sprite) {
@@ -17,9 +19,9 @@ public class BombItems extends Items {
 	}
 	
 	@Override
-	public boolean collide(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-		if(entity instanceof Bomber) {
-			((Bomber) entity).addPowerup(this);
+	public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+		if (entity instanceof Bomber) {
+			((Bomber) entity).addItem(this);
 			Sound.play("item");
 			remove();
 			return true;
@@ -32,7 +34,4 @@ public class BombItems extends Items {
 		active = true;
 		Game.addBombRate(1);
 	}
-	
-
-
 }

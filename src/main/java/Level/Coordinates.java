@@ -2,6 +2,10 @@ package main.java.Level;
 
 import main.java.Game;
 
+/**
+ * Class dùng để chuyển đổi tọa độ
+ * của các thực thể, phục vụ quá trình chơi game.
+ */
 public class Coordinates {
 	
 	public static int pixelToTile(double i) {

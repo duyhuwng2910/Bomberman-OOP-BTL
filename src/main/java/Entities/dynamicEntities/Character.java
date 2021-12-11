@@ -4,7 +4,6 @@ import main.java.Board;
 import main.java.Game;
 import main.java.Entities.AnimatedEntitiy;
 import main.java.Graphics.Screen;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import java.io.IOException;
  * hoạt hình bao gồm Bomber và Enemy.
  */
 public abstract class Character extends AnimatedEntitiy {
-	
 	protected Board board;
 	protected int direction = -1;
 	protected boolean isAlive = true;
@@ -57,11 +55,11 @@ public abstract class Character extends AnimatedEntitiy {
 	 */
 	protected abstract boolean canMove(double x, double y) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 	
-	protected double getXMessage() {
+	protected double getXNotification() {
 		return (x * Game.SCALE) + (sprite.SIZE / 2 * Game.SCALE);
 	}
 	
-	protected double getYMessage() {
+	protected double getYNotification() {
 		return (y * Game.SCALE) - (sprite.SIZE / 2 * Game.SCALE);
 	}
 	

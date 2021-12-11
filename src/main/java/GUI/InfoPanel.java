@@ -3,17 +3,14 @@ package main.java.GUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import main.java.Game;
 
 public class InfoPanel extends JPanel {
-	
-	private JLabel timeLabel;
-	private JLabel pointsLabel;
-	private JLabel livesLabel;
+	protected JLabel timeLabel;
+	protected JLabel pointsLabel;
+	protected JLabel livesLabel;
 
 	public InfoPanel(Game game) {
 		setLayout(new GridLayout());
@@ -33,8 +30,7 @@ public class InfoPanel extends JPanel {
 		add(timeLabel);
 		add(pointsLabel);
 		add(livesLabel);
-		
-		
+
 		setBackground(Color.black);
 		setPreferredSize(new Dimension(0, 40));
 	}
@@ -43,13 +39,12 @@ public class InfoPanel extends JPanel {
 		timeLabel.setText("Time: " + t);
 	}
 
-	public void setLives(int t) {
-		livesLabel.setText("Lives: " + t);
-		
+	public void setPoints(int t) {
+		pointsLabel.setText("Points: " + t);
 	}
 
-	public void setPoints(int t) {
-		pointsLabel.setText("Points: " + t);		
+	public void setLives(int t) {
+		livesLabel.setText("Lives: " + t);
 	}
 	
 }

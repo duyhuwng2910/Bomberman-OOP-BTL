@@ -10,7 +10,6 @@ import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 import main.java.Level.Coordinates;
 import main.java.Sound.Sound;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
@@ -19,11 +18,8 @@ import java.io.IOException;
  * Class của thực thể Bomb.
  */
 public class Bomb extends AnimatedEntitiy {
-
-	//options
 	protected double timeToExplode = 150; //2.5 giây - thời gian phát nổ
 	public int timeAfter = 30; //thời gian sau khi bom nổ
-	
 	protected Board board;
 	protected boolean allowedToPass = true;
 	protected Flame[] flames = null;
@@ -41,40 +37,41 @@ public class Bomb extends AnimatedEntitiy {
 		if(timeToExplode > 0)
 			timeToExplode--;
 		else {
-			if(!exploded)
-				explosion();
-			else
-				updateExplosions();
-			
-			if(timeAfter > 0)
-				timeAfter--;
-			else
-				remove();
+      if (!exploded) {
+        explosion();
+      } else {
+        updateFlames();
+			}
+
+      if (timeAfter > 0) {
+        timeAfter--;
+      } else {
+        remove();
+			}
 		}
-			
 		animate();
 	}
 	
 	@Override
 	public void render(Screen screen) {
-		if(exploded) {
+		if (exploded) {
 			sprite =  Sprite.bomb_exploded2;
-			renderExplosions(screen);
-		} else
-			sprite = Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1, Sprite.bomb_2, animate, 60);
-		
+			renderFlames(screen);
+    } else {
+      sprite = Sprite.movingSprite(Sprite.bomb, Sprite.bomb_1, Sprite.bomb_2, animate, 60);
+		}
 		int xt = (int) x << 4;
 		int yt = (int) y << 4;
 		screen.renderEntity(xt, yt , this);
 	}
 	
-	public void renderExplosions(Screen screen) {
+	public void renderFlames(Screen screen) {
 		for (Flame flame : flames) {
 			flame.render(screen);
 		}
 	}
 	
-	public void updateExplosions() {
+	public void updateFlames() {
 		for (int i = 0; i < flames.length; i++) {
 			flames[i].update();
 		}
@@ -92,63 +89,55 @@ public class Bomb extends AnimatedEntitiy {
 		exploded = true;
 		// Tiến hành xử lý sự kiện khi Character
 		// đứng trong khu vực chịu ảnh hưởng của Bomb
-		Character a = board.getMobAt(x, y);
-		if(a != null)  {
+		Character a = board.getCharacterAt(x, y);
+
+		if (a != null)  {
 			a.kill();
 		}
-		
 		flames = new Flame[4];
 		
 		for (int i = 0; i < flames.length; i++) {
 			flames[i] = new Flame((int) x, (int) y, i, Game.getBombRadius(), board);
 		}
-
 		// Hiệu ứng âm thanh Bomb nổ
 		Sound.play("bom");
 	}
 
 	@Override
-	public boolean collide(Entity e) {
+	public boolean collided(Entity e) {
 		// Xử lý khi Bomber đi ra khỏi khu vực đặt bomb
-		if(e instanceof Bomber) {
+		if (e instanceof Bomber) {
 			double diffX = e.getX() - Coordinates.tileToPixel(getX());
 			double diffY = e.getY() - Coordinates.tileToPixel(getY());
 			
-			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) { // differences to see if the player has moved out of the bomb, tested values
+			if (!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) { // differences to see if the player has moved out of the bomb, tested values
 				allowedToPass = false;
 			}
-			
 			return allowedToPass;
 		}
-
 		// Xử lý va chạm với hiệu ứng flame của Bomb khác
-		if(e instanceof Flame) {
+		if (e instanceof Flame) {
 			explodedTime();
 			return true;
 		}
-		
 		return false;
 	}
 
-	public FlameSegment explosionAt(int x, int y) {
-		if(!exploded) {
+	public FlameSegment flameAt(int x, int y) {
+		if (!exploded) {
 			return null;
 		}
 
 		for (int i = 0; i < flames.length; i++) {
-			if(flames[i] == null) {
+			if (flames[i] == null) {
 				return null;
 			}
-			FlameSegment fs = flames[i].explosionAt(x, y);
-			if(fs != null) {
+			FlameSegment fs = flames[i].flameSegmentAt(x, y);
+
+			if (fs != null) {
 				return fs;
 			}
 		}
-
 		return null;
-	}
-
-	public boolean isExploded() {
-		return exploded;
 	}
 }

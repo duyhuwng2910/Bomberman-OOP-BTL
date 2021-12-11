@@ -2,21 +2,21 @@ package main.java.GUI;
 
 import java.awt.BorderLayout;
 import java.io.IOException;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import main.java.Game;
 import main.java.GUI.menu.Menu;
 
+/**
+ * Class Frame dùng để hiện hình ảnh
+ * của toàn bộ quá trình chạy game.
+ */
 public class Frame extends JFrame {
-	
 	public GamePanel gamePanel;
 	private JPanel jPanel;
 	private InfoPanel infoPanel;
-	
 	private Game game;
 
 	public Frame() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
@@ -32,22 +32,12 @@ public class Frame extends JFrame {
 		game = gamePanel.getGame();
 		
 		add(jPanel);
-		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
-		setVisible(true);	
-		
+		setVisible(true);
 		game.start();
-	}
-
-	public void newGame() {
-		game.getBoard().newGame();
-	}
-	
-	public void changeLevel(int i) {
-		game.getBoard().changeLevel(i);
 	}
 	
 	public void pauseGame() {
@@ -56,10 +46,6 @@ public class Frame extends JFrame {
 	
 	public void resumeGame() {
 		game.getBoard().gameResume();
-	}
-	
-	public boolean isRunning() {
-		return game.isRunning();
 	}
 	
 	public void setTime(int time) {
@@ -73,7 +59,4 @@ public class Frame extends JFrame {
 	public void setPoints(int points) {
 		infoPanel.setPoints(points);
 	}
-
-
-	
 }

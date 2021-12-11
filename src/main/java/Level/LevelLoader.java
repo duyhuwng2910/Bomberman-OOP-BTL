@@ -3,8 +3,11 @@ package main.java.Level;
 import main.java.Board;
 import main.java.Exception.LoadLevelException;
 
-public abstract class LevelLoader implements ILevel {
-
+/**
+ * Class trừu tượng phục vụ quá trình
+ * load level từ tệp cấu hình.
+ */
+public abstract class LevelLoader {
 	protected int width, height, level;
 	protected String[] lineTiles;
 	protected Board board;
@@ -14,7 +17,6 @@ public abstract class LevelLoader implements ILevel {
 		this.board = board;
 	}
 
-	@Override
 	public abstract void loadLevel(String path) throws LoadLevelException;
 	
 	public abstract void createEntities();
@@ -30,5 +32,4 @@ public abstract class LevelLoader implements ILevel {
 	public int getLevel() {
 		return level;
 	}
-
 }

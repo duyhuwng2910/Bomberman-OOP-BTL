@@ -5,22 +5,19 @@ import main.java.Entities.Entity;
 import main.java.Entities.dynamicEntities.Bomber;
 import main.java.Graphics.Sprite;
 import main.java.Sound.Sound;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public class SpeedItems extends Items {
-
 	public SpeedItems(int x, int y, int level, Sprite sprite) {
 		super(x, y, level, sprite);
 	}
 	
 	@Override
-	public boolean collide(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-		
-		if(entity instanceof Bomber) {
-			((Bomber) entity).addPowerup(this);
+	public boolean collided(Entity entity) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+		if (entity instanceof Bomber) {
+			((Bomber) entity).addItem(this);
 			remove();
 			Sound.play("item");
 			return true;
@@ -31,9 +28,6 @@ public class SpeedItems extends Items {
 	@Override
 	public void setValues() {
 		active = true;
-		Game.addPlayerSpeed(0.2);
+		Game.addPlayerSpeed(0.25);
 	}
-	
-
-
 }
