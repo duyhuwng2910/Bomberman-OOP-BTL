@@ -1,4 +1,4 @@
-package main.java.Entities.staticEntities.Destroyable;
+package main.java.Entities.staticEntities;
 
 import main.java.Entities.Entity;
 import main.java.Entities.Bomb.Flame;
@@ -10,7 +10,12 @@ import main.java.Level.Coordinates;
 /**
  * Class đại diện cho thực thể tĩnh Brick.
  */
-public class Brick extends DestroyableTile {
+public class Brick extends Tile {
+    private final int MAX_ANIMATE = 7500;
+    private int animate = 0;
+    protected boolean destroyed = false;
+    protected int timeToDisappear = 20;
+    protected Sprite belowSprite = Sprite.grass;
     public Brick(int x, int y, Sprite sprite) {
         super(x, y, sprite);
     }
@@ -29,7 +34,38 @@ public class Brick extends DestroyableTile {
 
     @Override
     public void update() {
-        super.update();
+        if (destroyed) {
+            if (animate < MAX_ANIMATE) {
+                animate++;
+            } else {
+                animate = 0;
+            }
+            if (timeToDisappear > 0) {
+                timeToDisappear--;
+            } else {
+                remove();
+            }
+        }
+    }
+
+    public void destroy() {
+        destroyed = true;
+    }
+
+    public void addBelowSprite(Sprite sprite) {
+        belowSprite = sprite;
+    }
+
+    protected Sprite movingSprite(Sprite normal, Sprite x1, Sprite x2) {
+        int calc = animate % 30;
+
+        if (calc < 10) {
+            return normal;
+        }
+        if (calc < 20) {
+            return x1;
+        }
+        return x2;
     }
 
     @Override

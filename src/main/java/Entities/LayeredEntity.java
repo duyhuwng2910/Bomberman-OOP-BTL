@@ -2,7 +2,7 @@ package main.java.Entities;
 
 import java.io.IOException;
 import java.util.LinkedList;
-import main.java.Entities.staticEntities.Destroyable.DestroyableTile;
+import main.java.Entities.staticEntities.Brick;
 import main.java.Graphics.Screen;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -21,8 +21,8 @@ public class LayeredEntity extends Entity {
         for (int i = 0; i < entities.length; i++) {
             entityLinkedList.add(entities[i]);
             if (i > 1) {
-                if (entities[i] instanceof DestroyableTile) {
-                    ((DestroyableTile) entities[i]).addBelowSprite(entities[i - 1].getSprite());
+                if (entities[i] instanceof Brick) {
+                    ((Brick) entities[i]).addBelowSprite(entities[i - 1].getSprite());
                 }
             }
         }

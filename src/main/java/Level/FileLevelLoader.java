@@ -17,7 +17,7 @@ import main.java.Entities.dynamicEntities.Enemy.Oneal;
 import main.java.Entities.staticEntities.Grass;
 import main.java.Entities.staticEntities.Portal;
 import main.java.Entities.staticEntities.Wall;
-import main.java.Entities.staticEntities.Destroyable.Brick;
+import main.java.Entities.staticEntities.Brick;
 import main.java.Entities.staticEntities.Items.BombItems;
 import main.java.Entities.staticEntities.Items.FlameItems;
 import main.java.Entities.staticEntities.Items.SpeedItems;
