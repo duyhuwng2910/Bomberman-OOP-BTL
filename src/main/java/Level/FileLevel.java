@@ -25,16 +25,16 @@ import main.java.Exception.LoadLevelException;
 import main.java.Graphics.Screen;
 import main.java.Graphics.Sprite;
 
-public class FileLevelLoader extends LevelLoader {
+public class FileLevel extends Level {
 	
-	public FileLevelLoader(String path, Board board) throws LoadLevelException {
+	public FileLevel(String path, Board board) throws LoadLevelException {
 		super(path, board);
 	}
 	
 	@Override
 	public void loadLevel(String path) throws LoadLevelException {
 		try {
-			URL absPath = FileLevelLoader.class.getResource("/" + path);
+			URL absPath = FileLevel.class.getResource("/" + path);
 			BufferedReader in = new BufferedReader(new InputStreamReader(absPath.openStream()));
 			String data = in.readLine();
 			StringTokenizer tokens = new StringTokenizer(data);

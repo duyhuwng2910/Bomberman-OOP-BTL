@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <ScappleDocument ID="452693F5-722D-45CE-8132-CE95C3110E78" Version="1.1">
    <Notes>
-      <Note Width="139.124" FontSize="12" ID="1" Position="579.6,153.8">
+      <Note Width="139.124" FontSize="12" ID="1" Position="579.6,180.8">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -10,28 +10,28 @@
          <ConnectedNoteIDs>9, 12</ConnectedNoteIDs>
          <PointsToNoteIDs>12</PointsToNoteIDs>
       </Note>
-      <Note Width="46.6797" FontSize="12" ID="5" Position="160.8,277.4">
+      <Note Width="117.761" FontSize="12" ID="5" Position="176.4,182.1">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>+ Brick</String>
-         <ConnectedNoteIDs>18</ConnectedNoteIDs>
-         <PointsToNoteIDs>18</PointsToNoteIDs>
+         <String>+ Brick extends Tile</String>
+         <ConnectedNoteIDs>13</ConnectedNoteIDs>
+         <PointsToNoteIDs>13</PointsToNoteIDs>
       </Note>
-      <Note Width="65.7915" FontSize="12" ID="6" Position="476.0,146.7">
+      <Note Width="65.7915" FontSize="12" ID="6" Position="476.0,173.7">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>+ Portal
-+ Grass
-+ Wall
+         <String>+ Portal&#xd;
++ Grass&#xd;
++ Wall&#xd;
 + Tile</String>
          <ConnectedNoteIDs>13</ConnectedNoteIDs>
          <PointsToNoteIDs>13</PointsToNoteIDs>
       </Note>
-      <Note Width="114.624" FontSize="12" ID="7" Position="327.5,160.3">
+      <Note Width="114.624" FontSize="12" ID="7" Position="327.5,187.3">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -40,7 +40,7 @@
          <ConnectedNoteIDs>8, 13</ConnectedNoteIDs>
          <PointsToNoteIDs>13</PointsToNoteIDs>
       </Note>
-      <Note Width="120.544" FontSize="12" ID="8" Position="325.1,220.1">
+      <Note Width="120.544" FontSize="12" ID="8" Position="325.1,247.1">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -49,7 +49,7 @@
          <ConnectedNoteIDs>2, 7</ConnectedNoteIDs>
          <PointsToNoteIDs>7</PointsToNoteIDs>
       </Note>
-      <Note Width="131.421" FontSize="12" ID="11" Position="426.7,1.6">
+      <Note Width="131.421" FontSize="12" ID="11" Position="422.5,14.1">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -57,7 +57,7 @@
          <String>&lt;&lt;Package>> Entities</String>
          <ConnectedNoteIDs>12-14, 20</ConnectedNoteIDs>
       </Note>
-      <Note Width="180.803" FontSize="12" ID="12" Position="537.8,97.8">
+      <Note Width="180.803" FontSize="12" ID="12" Position="537.8,124.8">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -66,35 +66,16 @@
          <ConnectedNoteIDs>1, 11</ConnectedNoteIDs>
          <PointsToNoteIDs>11</PointsToNoteIDs>
       </Note>
-      <Note Width="168.85" FontSize="12" ID="13" Position="296.0,94.5">
+      <Note Width="168.85" FontSize="12" ID="13" Position="284.6,125.3">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
          <String>&lt;&lt;Package>> Static entities</String>
-         <ConnectedNoteIDs>6-7, 11, 17</ConnectedNoteIDs>
+         <ConnectedNoteIDs>5-7, 11</ConnectedNoteIDs>
          <PointsToNoteIDs>11</PointsToNoteIDs>
       </Note>
-      <Note Width="160.415" FontSize="12" ID="17" Position="135.6,150.9">
-         <Appearance>
-            <Alignment>Left</Alignment>
-            <Border Weight="2" Style="Rounded"/>
-         </Appearance>
-         <String>&lt;&lt;Package>> Destroyable</String>
-         <ConnectedNoteIDs>13, 18</ConnectedNoteIDs>
-         <PointsToNoteIDs>13</PointsToNoteIDs>
-      </Note>
-      <Note Width="106.091" FontSize="12" ID="18" Position="151.4,202.9">
-         <Appearance>
-            <Alignment>Left</Alignment>
-            <Border Weight="2" Style="Rounded"/>
-         </Appearance>
-         <String>+ DestroyableTile
-extends Tile</String>
-         <ConnectedNoteIDs>5, 17</ConnectedNoteIDs>
-         <PointsToNoteIDs>17</PointsToNoteIDs>
-      </Note>
-      <Note Width="123.035" FontSize="12" ID="14" Position="170.4,37.6">
+      <Note Width="123.035" FontSize="12" ID="14" Position="170.4,64.6">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -103,62 +84,62 @@ extends Tile</String>
          <ConnectedNoteIDs>11, 21</ConnectedNoteIDs>
          <PointsToNoteIDs>11</PointsToNoteIDs>
       </Note>
-      <Note Width="103.699" FontSize="12" ID="19" Position="896.6,27.6">
+      <Note Width="103.699" FontSize="12" ID="19" Position="896.6,54.6">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>Chú thích:
-// Interface
-+ Class
+         <String>Chú thích:&#xd;
+// Interface&#xd;
++ Class&#xd;
 ++ Abstract class</String>
       </Note>
-      <Note Width="113.916" FontSize="12" ID="20" Position="712.9,8.1">
+      <Note Width="113.916" FontSize="12" ID="20" Position="712.9,35.1">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>++ Entity
-++ Animated Entity
-+ LayeredEntity
+         <String>++ Entity&#xd;
+++ Animated Entity&#xd;
++ LayeredEntity&#xd;
 + Notification</String>
          <ConnectedNoteIDs>11</ConnectedNoteIDs>
          <PointsToNoteIDs>11</PointsToNoteIDs>
       </Note>
-      <Note Width="100.964" FontSize="12" ID="21" Position="49.2,72.4">
+      <Note Width="100.964" FontSize="12" ID="21" Position="49.2,99.4">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>+Bomb
-+Flame
+         <String>+Bomb&#xd;
++Flame&#xd;
 +FlameSegment</String>
          <ConnectedNoteIDs>14</ConnectedNoteIDs>
          <PointsToNoteIDs>14</PointsToNoteIDs>
       </Note>
-      <Note Width="86.2793" FontSize="12" ID="2" Position="342.0,283.7">
+      <Note Width="86.2793" FontSize="12" ID="2" Position="342.0,310.7">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>+ BombItems
-+ FlameItems
+         <String>+ BombItems&#xd;
++ FlameItems&#xd;
 + SpeedItems</String>
          <ConnectedNoteIDs>8</ConnectedNoteIDs>
          <PointsToNoteIDs>8</PointsToNoteIDs>
       </Note>
-      <Note Width="64.1602" FontSize="12" ID="0" Position="572.8,336.3">
+      <Note Width="64.1602" FontSize="12" ID="0" Position="584.3,348.8">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>+ Balloom
-+ Doll
+         <String>+ Balloom&#xd;
++ Doll&#xd;
 + Oneal</String>
          <ConnectedNoteIDs>3</ConnectedNoteIDs>
          <PointsToNoteIDs>3</PointsToNoteIDs>
       </Note>
-      <Note Width="153.76" FontSize="12" ID="3" Position="534.9,269.7">
+      <Note Width="177.6" FontSize="12" ID="3" Position="534.9,296.7">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -167,7 +148,7 @@ extends Tile</String>
          <ConnectedNoteIDs>0, 9</ConnectedNoteIDs>
          <PointsToNoteIDs>9</PointsToNoteIDs>
       </Note>
-      <Note Width="62.7563" FontSize="12" ID="4" Position="735.8,275.4">
+      <Note Width="62.7563" FontSize="12" ID="4" Position="735.8,302.4">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
@@ -176,81 +157,80 @@ extends Tile</String>
          <ConnectedNoteIDs>9</ConnectedNoteIDs>
          <PointsToNoteIDs>9</PointsToNoteIDs>
       </Note>
-      <Note Width="132.336" FontSize="12" ID="9" Position="608.4,197.4">
+      <Note Width="218.8" FontSize="12" ID="9" Position="608.4,224.4">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>++ Character ex tends
-AnimatedEntity</String>
+         <String>++ Character extends AnimatedEntity</String>
          <ConnectedNoteIDs>1, 3-4</ConnectedNoteIDs>
          <PointsToNoteIDs>1</PointsToNoteIDs>
       </Note>
-      <Note Width="145.422" FontSize="12" ID="10" Position="28.0,393.7">
+      <Note Width="145.422" FontSize="12" ID="10" Position="28.0,420.7">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>&lt;&lt;Package>> Exception
-+ GameException
+         <String>&lt;&lt;Package>> Exception&#xd;
++ GameException&#xd;
 ++ LoadLevelException</String>
       </Note>
-      <Note Width="140.515" FontSize="12" ID="15" Position="203.7,394.9">
+      <Note Width="140.515" FontSize="12" ID="15" Position="203.7,421.9">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>&lt;&lt;Package>> Graphics
-// Render
-+ Screen
-+ Sprite
+         <String>&lt;&lt;Package>> Graphics&#xd;
+// Render&#xd;
++ Screen&#xd;
++ Sprite&#xd;
 + SpriteSheet</String>
       </Note>
-      <Note Width="113.416" FontSize="12" ID="16" Position="381.7,391.4">
+      <Note Width="113.416" FontSize="12" ID="16" Position="381.7,418.4">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>&lt;&lt;Package>> GUI
-+ Frame
-+ GamePanel
+         <String>&lt;&lt;Package>> GUI&#xd;
++ Frame&#xd;
++ GamePanel&#xd;
 + InfoPanel</String>
       </Note>
-      <Note Width="118.127" FontSize="12" ID="22" Position="23.4,482.1">
+      <Note Width="118.127" FontSize="12" ID="22" Position="23.4,509.1">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>&lt;&lt;Package>> Input
+         <String>&lt;&lt;Package>> Input&#xd;
 + Keyboard</String>
       </Note>
-      <Note Width="132.051" FontSize="12" ID="23" Position="186.0,494.8">
+      <Note Width="132.051" FontSize="12" ID="23" Position="186.0,521.8">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>&lt;&lt;Package>> Level
-+ Coordinates
-++ LevelLoader
+         <String>&lt;&lt;Package>> Level&#xd;
++ Coordinates&#xd;
+++ LevelLoader&#xd;
 + FileLevelLoader</String>
       </Note>
-      <Note Width="126.538" FontSize="12" ID="24" Position="346.8,490.2">
+      <Note Width="126.538" FontSize="12" ID="24" Position="346.8,517.2">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>&lt;&lt;Package>> Sound
+         <String>&lt;&lt;Package>> Sound&#xd;
 + Sound</String>
       </Note>
-      <Note Width="105.859" FontSize="12" ID="25" Position="536.2,422.4">
+      <Note Width="105.859" FontSize="12" ID="25" Position="536.2,449.4">
          <Appearance>
             <Alignment>Left</Alignment>
             <Border Weight="2" Style="Rounded"/>
          </Appearance>
-         <String>+ Board
-+ Game
-+ GameButton
-+ GameLauncher
+         <String>+ Board&#xd;
++ Game&#xd;
++ GameButton&#xd;
++ GameLauncher&#xd;
 + MenuGame</String>
       </Note>
    </Notes>

@@ -18,8 +18,8 @@ import main.java.Exception.LoadLevelException;
 import main.java.Graphics.Render;
 import main.java.Graphics.Screen;
 import main.java.Input.Keyboard;
-import main.java.Level.FileLevelLoader;
-import main.java.Level.LevelLoader;
+import main.java.Level.FileLevel;
+import main.java.Level.Level;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -30,7 +30,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * của game.
  */
 public class Board implements Render {
-	protected LevelLoader level;
+	protected Level level;
 	protected Game game;
 	protected Keyboard input;
 	protected Screen screen;
@@ -121,7 +121,7 @@ public class Board implements Render {
 		notificationList.clear();
 		
 		try {
-			this.level = new FileLevelLoader("levels/Level" + level + ".txt", this);
+			this.level = new FileLevel("levels/Level" + level + ".txt", this);
 			entities = new Entity[this.level.getHeight() * this.level.getWidth()];
 			this.level.createEntities();
 		} catch (LoadLevelException e) {
@@ -411,7 +411,7 @@ public class Board implements Render {
 		return input;
 	}
 	
-	public LevelLoader getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 	

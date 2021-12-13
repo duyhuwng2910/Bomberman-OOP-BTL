@@ -7,12 +7,12 @@ import main.java.Exception.LoadLevelException;
  * Class trừu tượng phục vụ quá trình
  * load level từ tệp cấu hình.
  */
-public abstract class LevelLoader {
+public abstract class Level {
 	protected int width, height, level;
 	protected String[] lineTiles;
 	protected Board board;
 
-	public LevelLoader(String path, Board board) throws LoadLevelException {
+	public Level(String path, Board board) throws LoadLevelException {
 		loadLevel(path);
 		this.board = board;
 	}
