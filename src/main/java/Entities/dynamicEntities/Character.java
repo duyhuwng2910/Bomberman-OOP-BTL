@@ -2,7 +2,7 @@ package main.java.Entities.dynamicEntities;
 
 import main.java.Board;
 import main.java.Game;
-import main.java.Entities.AnimatedEntitiy;
+import main.java.Entities.AnimatedEntity;
 import main.java.Graphics.Screen;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -13,7 +13,7 @@ import java.io.IOException;
  * các sự kiện của các nhân vật có chuyển động
  * hoạt hình bao gồm Bomber và Enemy.
  */
-public abstract class Character extends AnimatedEntitiy {
+public abstract class Character extends AnimatedEntity {
 	protected Board board;
 	protected int direction = -1;
 	protected boolean isAlive = true;

@@ -2,7 +2,7 @@ package main.java.Entities.Bomb;
 
 import main.java.Board;
 import main.java.Game;
-import main.java.Entities.AnimatedEntitiy;
+import main.java.Entities.AnimatedEntity;
 import main.java.Entities.Entity;
 import main.java.Entities.dynamicEntities.Character;
 import main.java.Entities.dynamicEntities.Bomber;
@@ -17,7 +17,7 @@ import java.io.IOException;
 /**
  * Class của thực thể Bomb.
  */
-public class Bomb extends AnimatedEntitiy {
+public class Bomb extends AnimatedEntity {
 	protected double timeToExplode = 150; //2.5 giây - thời gian phát nổ
 	public int timeAfter = 30; //thời gian sau khi bom nổ
 	protected Board board;

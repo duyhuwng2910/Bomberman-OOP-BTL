@@ -10,9 +10,9 @@ import main.java.Graphics.Sprite;
  */
 public class Kondoria extends Enemy {
 	public Kondoria(int x, int y, Board board) {
-		super(x, y, board, Sprite.kondoria_dead, Game.getPlayerSpeed() / 4, 500);
+		super(x, y, board, Sprite.kondoria_dead, Game.getPlayerSpeed(), 500);
 		sprite = Sprite.kondoria_right1;
-		ai = new AIIntermediate(this.board.getBomber(), this); //TODO: implement AIHigh
+		ai = new AIIntermediate(this.board.getBomber(), this, board);
 		direction = ai.calculateDirection();
 	}
 

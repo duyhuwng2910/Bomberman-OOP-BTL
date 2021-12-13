@@ -25,6 +25,7 @@ public class Bomber extends Character {
 	private List<Bomb> bombList;
 	protected Keyboard keyboard;
 	protected int timeBetweenPutBombs = 0;
+	public boolean putBombSuccess = false;
 	public static List<Items> itemsList = new ArrayList<>();
 	
 	public Bomber(int x, int y, Board board) {
@@ -79,6 +80,9 @@ public class Bomber extends Character {
 			placeBomb(xt,yt);
 			Game.addBombRate(-1);
 			timeBetweenPutBombs = 30;
+			putBombSuccess = true;
+		} else {
+			putBombSuccess = false;
 		}
 	}
 	
@@ -87,7 +91,11 @@ public class Bomber extends Character {
 		board.addBomb(b);
 		Sound.play("bomset");
 	}
-	
+
+	public boolean isPutBombSuccess() {
+		return putBombSuccess;
+	}
+
 	private void clearBombs() {
 		Iterator<Bomb> bs = bombList.iterator();
 		Bomb b;

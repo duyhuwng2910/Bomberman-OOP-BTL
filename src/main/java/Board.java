@@ -65,7 +65,7 @@ public class Board implements Render {
 			return;
 		}
 		updateEntities();
-		updateMobs();
+		updateCharacters();
 		updateBombs();
 		updateNotification();
 		detectEndGame();
@@ -379,7 +379,7 @@ public class Board implements Render {
 		}
 	}
 	
-	protected void updateMobs() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+	protected void updateCharacters() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 		if (game.isPaused()) {
 			return;
 		}

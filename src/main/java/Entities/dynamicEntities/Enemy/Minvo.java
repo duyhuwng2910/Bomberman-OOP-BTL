@@ -1,6 +1,7 @@
 package main.java.Entities.dynamicEntities.Enemy;
 
 import main.java.Board;
+import main.java.Entities.dynamicEntities.Enemy.AI_enemies.AIBeginner;
 import main.java.Game;
 import main.java.Entities.dynamicEntities.Enemy.AI_enemies.AIIntermediate;
 import main.java.Graphics.Sprite;
@@ -10,9 +11,9 @@ import main.java.Graphics.Sprite;
  */
 public class Minvo extends Enemy {
 	public Minvo(int x, int y, Board board) {
-		super(x, y, board, Sprite.minvo_dead, Game.getPlayerSpeed() * 2, 400);
+		super(x, y, board, Sprite.minvo_dead, Game.getPlayerSpeed() * 0.2, 400);
 		sprite = Sprite.minvo_right1;
-		ai = new AIIntermediate(this.board.getBomber(), this);
+		ai = new AIBeginner();
 		direction = ai.calculateDirection();
 	}
 

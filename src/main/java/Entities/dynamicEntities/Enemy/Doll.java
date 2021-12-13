@@ -1,7 +1,9 @@
 package main.java.Entities.dynamicEntities.Enemy;
 
 import main.java.Board;
+import main.java.Entities.dynamicEntities.Enemy.AI_enemies.AIAmateur;
 import main.java.Entities.dynamicEntities.Enemy.AI_enemies.AIBeginner;
+import main.java.Game;
 import main.java.Graphics.Sprite;
 
 /**
@@ -9,9 +11,9 @@ import main.java.Graphics.Sprite;
  */
 public class Doll extends Enemy {
 	public Doll(int x, int y, Board board) {
-		super(x, y, board, Sprite.doll_dead, 0.8, 80);
+		super(x, y, board, Sprite.doll_dead, Game.getPlayerSpeed(), 200);
 		sprite = Sprite.doll_right1;
-		ai = new AIBeginner();
+    ai = new AIAmateur(this.board.getBomber(), this, board);
 		direction = ai.calculateDirection();
 	}
 

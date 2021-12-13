@@ -51,7 +51,6 @@ public abstract class Enemy extends Character {
 			afterKill();
 			return;
 		}
-
     if (isAlive) {
       calculateMove();
 		}
