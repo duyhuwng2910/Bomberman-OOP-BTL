@@ -18,7 +18,7 @@ public class InfoCenter implements WindowListener {
 	  public InfoCenter(Frame frame, String title, String message, int option) {
 		  this.frame = frame;
 		  final JFrame center = new JFrame(title);
-			final JButton button = new JButton("GOT IT");
+			final JButton button = new JButton("Đã hiểu");
 			button.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent actionEvent)

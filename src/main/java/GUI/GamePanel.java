@@ -19,8 +19,8 @@ public class GamePanel extends JPanel {
 			game = new Game(frame);
 			add(game);
 			game.setVisible(true);
-		} catch (GameException e) {
-			e.printStackTrace();
+		} catch (GameException gameException) {
+			gameException.printStackTrace();
 			System.exit(0);
 		}
 		setVisible(true);

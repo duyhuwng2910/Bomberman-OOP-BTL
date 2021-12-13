@@ -17,15 +17,15 @@ public class Options extends JMenu implements ChangeListener {
 	Frame frame;
 	
 	public Options(Frame frame) {
-		super("Options");
+		super("Cài đặt");
 		this.frame = frame;
 		
-		JMenuItem pause = new JMenuItem("Pause");
+		JMenuItem pause = new JMenuItem("Tạm dừng");
 		pause.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 		pause.addActionListener(new MenuActionListener(frame));
 		add(pause);
 		
-		JMenuItem resume = new JMenuItem("Resume");
+		JMenuItem resume = new JMenuItem("Tiếp tục trò chơi");
 		resume.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.CTRL_MASK));
 		resume.addActionListener(new MenuActionListener(frame));
 		add(resume);
@@ -42,10 +42,10 @@ public class Options extends JMenu implements ChangeListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			  if(actionEvent.getActionCommand().equals("Pause")) {
+			  if(actionEvent.getActionCommand().equals("Tạm dừng")) {
 				  _frame.pauseGame();
 			  }
-			  if(actionEvent.getActionCommand().equals("Resume")) {
+			  if(actionEvent.getActionCommand().equals("Tiếp tục trò chơi")) {
 				  _frame.resumeGame();
 			  }
 		  }

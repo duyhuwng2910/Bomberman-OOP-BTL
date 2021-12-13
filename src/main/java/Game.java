@@ -17,6 +17,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * Class thực hiện toàn bộ quá trình chơi game.
  */
 public class Game extends Canvas {
+	public static final double VERSION = 1.0;
 	public static final int TILES_SIZE = 16, WIDTH = TILES_SIZE * (31 / 2), HEIGHT = 13 * TILES_SIZE;
 
 	public static int SCALE = 3;

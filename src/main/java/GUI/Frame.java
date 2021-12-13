@@ -39,7 +39,11 @@ public class Frame extends JFrame {
 		setVisible(true);
 		game.start();
 	}
-	
+
+	public void newGame() {
+		game.getBoard().newGame();
+	}
+
 	public void pauseGame() {
 		game.getBoard().gamePause();
 	}

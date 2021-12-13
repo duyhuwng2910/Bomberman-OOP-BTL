@@ -20,4 +20,12 @@ public class Sound {
         clip.open(audioStream);
         clip.start();
     }
+
+    public static void stop(String sound) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+        File file = new File ( "./res/sound/"+ sound + ".wav");
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream (file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+        clip.stop();
+    }
 }

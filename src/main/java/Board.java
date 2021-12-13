@@ -98,6 +98,23 @@ public class Board implements Render {
 		renderBombs(screen);
 		renderCharacters(screen);
 	}
+
+	public void newGame() {
+		resetProperties();
+		changeLevel(1);
+	}
+
+	@SuppressWarnings("static-access")
+	private void resetProperties() {
+		points = Game.POINTS;
+		lives = Game.LIVES;
+		Bomber.itemsList.clear();
+
+		game.playerSpeed = 1.0;
+		game.bombRadius = 1;
+		game.bombRate = 1;
+
+	}
 	/*
  	|--------------------------------------------------------------------------
  	| Các trình bắt đầu vào game
