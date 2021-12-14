@@ -174,10 +174,14 @@ public class Game extends Canvas {
 
 	public void exportToTopScoresFile() {
 		try {
+			topScoresToString.clear();
+			for (int i = 0; i < 5; i++) {
+				topScoresToString.add(String.valueOf(topScores.get(4 - i)));
+			}
 			FileWriter fw = new FileWriter("Top Scores.txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			for (int i = 0; i < 5; i++) {
-				bw.write(topScores.get(4 - i));
+				bw.write(topScoresToString.get(4 - i));
 				bw.newLine();
 			}
 			bw.close();
@@ -191,14 +195,9 @@ public class Game extends Canvas {
 		return topScores;
 	}
 
-	public ArrayList<String> getTopScoresToString() {
-		return topScoresToString;
-	}
-
 	public static String getTopScoresList() {
 		String result = "Đây là bảng điểm của chúng ta: \n";
 		Collections.sort(topScores);
-
 		for (int i = topScores.size() - 1; i >= 0; i--) {
 			result = result + "Top " + (topScores.size() - i) + ": " + topScores.get(i) + "\n";
 		}

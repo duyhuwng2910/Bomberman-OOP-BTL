@@ -164,7 +164,6 @@ public class Board implements Render {
 		screenToShow = 1;
 		game.resetScreenDelay();
 		game.pause();
-		points = 0;
 	}
 	
 	public boolean detectNoEnemies() {
@@ -481,15 +480,21 @@ public class Board implements Render {
 	}
 
 	public void updateTopScores(int points) {
-		System.out.println("test!!");
-		for (int i = 4; i >= 0; i--) {
-			if (points > game.getTopScores().get(i)) {
-				game.getTopScores().remove(0);
-				game.getTopScores().add(points);
-				Collections.sort(game.getTopScores());
-				record = "\nCONGRATULATION! YOU HAVE REACTED THE RECORD ^^";
-				break;
-			}
+		if (points > game.getTopScores().get(4)) {
+			game.getTopScores().remove(0);
+			game.getTopScores().add(points);
+			Collections.sort(game.getTopScores());
+			record = "CHÚC MỪNG!! ĐIỂM CỦA BẠN ĐÁ PHÁ KỈ LỤC VÀ ON TOP ^^";
+    } else {
+      for (int i = 3; i >= 0; i--) {
+        if (points > game.getTopScores().get(i)) {
+          game.getTopScores().remove(0);
+          game.getTopScores().add(points);
+          Collections.sort(game.getTopScores());
+					record = "BẠN ĐÃ LỌT VÀO ĐƯỢC BẢNG VÀNG THÀNH TÍCH";
+          break;
+        }
+      }
 		}
 	}
 }

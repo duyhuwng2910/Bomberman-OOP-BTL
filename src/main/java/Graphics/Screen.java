@@ -111,12 +111,17 @@ public class Screen {
         Font font = new Font("Arial", Font.PLAIN, 20 * Game.SCALE);
         g.setFont(font);
         g.setColor(Color.white);
-        drawCenteredString("TRÒ CHƠI KẾT THÚC", getRealWidth(), getRealHeight(), g);
+        drawCenteredString("TRÒ CHƠI KẾT THÚC", getRealWidth(), getRealHeight() - 10, g);
 
         font = new Font("Arial", Font.PLAIN, 10 * Game.SCALE);
         g.setFont(font);
-        g.setColor(Color.yellow);
-        drawCenteredString("ĐIỂM SỐ CỦA BẠN: " + points + record, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
+        g.setColor(Color.orange);
+        drawCenteredString("ĐIỂM SỐ CỦA BẠN: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE - 10, g);
+
+        font = new Font("Arial", Font.PLAIN, 5 * Game.SCALE);
+        g.setFont(font);
+        g.setColor(Color.pink);
+        drawCenteredString(record, getRealWidth(), getRealHeight() + 2 * (Game.TILES_SIZE * 2) * Game.SCALE - 10, g);
     }
 
     public void drawChangeLevel(Graphics g, int level) {
