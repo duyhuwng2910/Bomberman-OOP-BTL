@@ -2,7 +2,6 @@ package main.java.Entities.dynamicEntities.Enemy;
 
 import main.java.Board;
 import main.java.Entities.dynamicEntities.Enemy.AI_enemies.AIAmateur;
-import main.java.Entities.dynamicEntities.Enemy.AI_enemies.AIBeginner;
 import main.java.Game;
 import main.java.Graphics.Sprite;
 

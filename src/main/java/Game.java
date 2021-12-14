@@ -5,7 +5,13 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import main.java.Exception.GameException;
 import main.java.Graphics.Screen;
 import main.java.GUI.Frame;
@@ -22,7 +28,7 @@ public class Game extends Canvas {
 
 	public static int SCALE = 3;
 	
-	public static final String TITLE = "Bomberman ";
+	public static final String TITLE = "Bomberman";
 
 	private static final int BOMB_RATE = 1;
 	private static final int BOMB_RADIUS = 1;
@@ -47,6 +53,9 @@ public class Game extends Canvas {
 	protected Board board;
 	protected Screen screen;
 	protected Frame frame;
+
+	private static final ArrayList<String> topScoresToString = new ArrayList<>();
+	private static final ArrayList<Integer> topScores = new ArrayList<>();
 
 	protected BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	protected int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
@@ -74,7 +83,7 @@ public class Game extends Canvas {
 		}
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		board.renderNotification(g);
+		board.renderNotifications(g);
 		g.dispose();
 		bs.show();
 	}
@@ -98,6 +107,7 @@ public class Game extends Canvas {
 	}
 	
 	public void start() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+		importTopScoresFromFile();
 		running = true;
 		long  lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
@@ -134,6 +144,65 @@ public class Game extends Canvas {
 				}
 			}
 		}
+	}
+
+	public void importTopScoresFromFile() {
+		try {
+			FileReader fr = new FileReader("Top Scores.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String tsline;
+			int i = 0;
+
+			while(i < 5) {
+				tsline = br.readLine();
+				if (tsline == null) {
+					break;
+				}
+				topScoresToString.add(tsline);
+				i++;
+			}
+			for (int j = 0; j < 5; j++) {
+				topScores.add(Integer.valueOf(topScoresToString.get(j)));
+			}
+			Collections.sort(topScores);
+			br.close();
+			fr.close();
+		} catch (Exception ignored){
+			System.out.println("Error!");
+		}
+	}
+
+	public void exportToTopScoresFile() {
+		try {
+			FileWriter fw = new FileWriter("Top Scores.txt");
+			BufferedWriter bw = new BufferedWriter(fw);
+			for (int i = 0; i < 5; i++) {
+				bw.write(topScores.get(4 - i));
+				bw.newLine();
+			}
+			bw.close();
+			fw.close();
+		} catch (Exception ignored) {
+			System.out.println("Error!");
+		}
+	}
+
+	public ArrayList<Integer> getTopScores() {
+		return topScores;
+	}
+
+	public ArrayList<String> getTopScoresToString() {
+		return topScoresToString;
+	}
+
+	public static String getTopScoresList() {
+		String result = "Đây là bảng điểm của chúng ta: \n";
+		Collections.sort(topScores);
+
+		for (int i = topScores.size() - 1; i >= 0; i--) {
+			result = result + "Top " + (topScores.size() - i) + ": " + topScores.get(i) + "\n";
+		}
+		return result;
 	}
 
 	public static double getPlayerSpeed() {
@@ -180,5 +249,4 @@ public class Game extends Canvas {
 	public void pause() {
 		paused = true;
 	}
-	
 }

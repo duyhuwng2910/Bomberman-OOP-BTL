@@ -20,9 +20,7 @@ public class Screen {
     public Screen(int width, int height) {
         this.width = width;
         this.height = height;
-
         pixels = new int[width * height];
-
     }
 
     public void clear() {
@@ -42,11 +40,9 @@ public class Screen {
                 if (xa < -entity.getSprite().getSize() || xa >= width || ya < 0 || ya >= height) {
                     break;
                 }
-
                 if (xa < 0) {
                     xa = 0;
                 }
-
                 int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
 
                 if (color != transparentColor) {
@@ -59,18 +55,27 @@ public class Screen {
     public void renderEntityWithBelowSprite(int xp, int yp, Entity entity, Sprite below) {
         xp -= xOffset;
         yp -= yOffset;
+
         for (int y = 0; y < entity.getSprite().getSize(); y++) {
             int ya = y + yp;
+
             for (int x = 0; x < entity.getSprite().getSize(); x++) {
                 int xa = x + xp;
-                if (xa < -entity.getSprite().getSize() || xa >= width || ya < 0 || ya >= height)
+
+                if (xa < -entity.getSprite().getSize() || xa >= width || ya < 0 || ya >= height) {
                     break;
-                if (xa < 0) xa = 0;
+                }
+                if (xa < 0) {
+                    xa = 0;
+                }
                 int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
-                if (color != transparentColor)
+
+                if (color != transparentColor) {
                     pixels[xa + ya * width] = color;
-                else
+                }
+                else {
                     pixels[xa + ya * width] = below.getPixel(x + y * below.getSize());
+                }
             }
         }
     }
@@ -85,7 +90,6 @@ public class Screen {
             return 0;
         }
         int temp = xOffset;
-
         double BomberX = bomber.getX() / 16;
         double complement = 0.5;
         int firstBreakpoint = board.getWidth() / 4;
@@ -97,22 +101,22 @@ public class Screen {
 
         return temp;
     }
-    /*
-    *Màn hình trò chơi.
+    /**
+     * Màn hình trò chơi.
      */
-    public void drawEndGame(Graphics g, int points) {
+    public void drawEndGame(Graphics g, int points, String record) {
         g.setColor(Color.black);
         g.fillRect(0, 0, getRealWidth(), getRealHeight());
 
         Font font = new Font("Arial", Font.PLAIN, 20 * Game.SCALE);
         g.setFont(font);
         g.setColor(Color.white);
-        drawCenteredString("GAME OVER", getRealWidth(), getRealHeight(), g);
+        drawCenteredString("TRÒ CHƠI KẾT THÚC", getRealWidth(), getRealHeight(), g);
 
         font = new Font("Arial", Font.PLAIN, 10 * Game.SCALE);
         g.setFont(font);
         g.setColor(Color.yellow);
-        drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
+        drawCenteredString("ĐIỂM SỐ CỦA BẠN: " + points + record, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
     }
 
     public void drawChangeLevel(Graphics g, int level) {
@@ -121,18 +125,15 @@ public class Screen {
         Font font = new Font("Arial", Font.PLAIN, 20 * Game.SCALE);
         g.setFont(font);
         g.setColor(Color.white);
-        drawCenteredString("LEVEL " + level, getRealWidth(), getRealHeight(), g);
-
+        drawCenteredString("MÀN " + level, getRealWidth(), getRealHeight(), g);
     }
 
     public void drawPaused(Graphics g) {
         Font font = new Font("Arial", Font.PLAIN, 20 * Game.SCALE);
         g.setFont(font);
         g.setColor(Color.white);
-        drawCenteredString("PAUSED", getRealWidth(), getRealHeight(), g);
-
+        drawCenteredString("DỪNG GAME", getRealWidth(), getRealHeight(), g);
     }
-
 
     public void drawCenteredString(String s, int w, int h, Graphics g) {
         FontMetrics fm = g.getFontMetrics();

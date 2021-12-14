@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,7 +47,9 @@ public class Board implements Render {
 	protected int time = Game.TIME;
 	protected int points = Game.POINTS;
 	protected int lives = Game.LIVES;
-	
+
+	public String record;
+
 	public Board(Game game, Keyboard input, Screen screen) {
 		this.game = game;
 		this.input = input;
@@ -67,7 +70,7 @@ public class Board implements Render {
 		updateEntities();
 		updateCharacters();
 		updateBombs();
-		updateNotification();
+		updateNotifications();
 		detectEndGame();
 		
 		for (int i = 0; i < characterList.size(); i++) {
@@ -78,13 +81,11 @@ public class Board implements Render {
 		}
 	}
 
-
 	@Override
 	public void render(Screen screen) {
 		if (game.isPaused()) {
 			return;
 		}
-
 		int x0 = Screen.xOffset >> 4;
 		int x1 = (Screen.xOffset + screen.getWidth() + Game.TILES_SIZE) / Game.TILES_SIZE;
 		int y0 = Screen.yOffset >> 4;
@@ -100,6 +101,7 @@ public class Board implements Render {
 	}
 
 	public void newGame() {
+		record = "";
 		resetProperties();
 		changeLevel(1);
 	}
@@ -113,7 +115,6 @@ public class Board implements Render {
 		game.playerSpeed = 1.0;
 		game.bombRadius = 1;
 		game.bombRate = 1;
-
 	}
 	/*
  	|--------------------------------------------------------------------------
@@ -138,23 +139,12 @@ public class Board implements Render {
 		notificationList.clear();
 		
 		try {
-			this.level = new FileLevel("levels/Level" + level + ".txt", this);
+			this.level = new FileLevel("levels/Màn " + level + ".txt", this);
 			entities = new Entity[this.level.getHeight() * this.level.getWidth()];
 			this.level.createEntities();
 		} catch (LoadLevelException e) {
 			endGame();
 		}
-	}
-
-	public boolean isItemUsed(int x, int y, int level) {
-		Items p;
-		for (int i = 0; i < Bomber.itemsList.size(); i++) {
-			p = Bomber.itemsList.get(i);
-      if (p.getX() == x && p.getY() == y && level == p.getLevel()) {
-        return true;
-			}
-		}
-		return false;
 	}
 
 	/*
@@ -169,9 +159,12 @@ public class Board implements Render {
 	}
 	
 	public void endGame() {
+		updateTopScores(points);
+		game.exportToTopScoresFile();
 		screenToShow = 1;
 		game.resetScreenDelay();
 		game.pause();
+		points = 0;
 	}
 	
 	public boolean detectNoEnemies() {
@@ -182,6 +175,17 @@ public class Board implements Render {
 			}
 		}
 		return total == 0;
+	}
+
+	public boolean isItemUsed(int x, int y, int level) {
+		Items p;
+		for (int i = 0; i < Bomber.itemsList.size(); i++) {
+			p = Bomber.itemsList.get(i);
+			if (p.getX() == x && p.getY() == y && level == p.getLevel()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void gamePause() {
@@ -201,7 +205,7 @@ public class Board implements Render {
 	public void drawScreen(Graphics g) {
 		switch (screenToShow) {
 			case 1:
-				screen.drawEndGame(g, points);
+				screen.drawEndGame(g, points, record);
 				break;
 			case 2:
 				screen.drawChangeLevel(g, level.getLevel());
@@ -356,7 +360,7 @@ public class Board implements Render {
 		}
 	}
 	
-	public void renderNotification(Graphics g) {
+	public void renderNotifications(Graphics g) {
 		Notification notification;
 		for (int i = 0; i < notificationList.size(); i++) {
 			notification = notificationList.get(i);
@@ -400,7 +404,7 @@ public class Board implements Render {
 		}
 	}
 	
-	protected void updateNotification() {
+	protected void updateNotifications() {
 		if(game.isPaused()) {
 			return;
 		}
@@ -474,5 +478,18 @@ public class Board implements Render {
 	
 	public int getWidth() {
 		return level.getWidth();
+	}
+
+	public void updateTopScores(int points) {
+		System.out.println("test!!");
+		for (int i = 4; i >= 0; i--) {
+			if (points > game.getTopScores().get(i)) {
+				game.getTopScores().remove(0);
+				game.getTopScores().add(points);
+				Collections.sort(game.getTopScores());
+				record = "\nCONGRATULATION! YOU HAVE REACTED THE RECORD ^^";
+				break;
+			}
+		}
 	}
 }

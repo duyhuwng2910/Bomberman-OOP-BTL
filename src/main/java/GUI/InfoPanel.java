@@ -11,6 +11,9 @@ public class InfoPanel extends JPanel {
 	protected JLabel timeLabel;
 	protected JLabel pointsLabel;
 	protected JLabel livesLabel;
+	protected JLabel bombItemsLabel;
+	protected JLabel flameItemsLabel;
+	protected JLabel speedItemsLabel;
 
 	public InfoPanel(Game game) {
 		setLayout(new GridLayout());
@@ -22,11 +25,11 @@ public class InfoPanel extends JPanel {
 		pointsLabel = new JLabel("Điểm số: " + game.getBoard().getPoints());
 		pointsLabel.setForeground(Color.white);
 		pointsLabel.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		livesLabel = new JLabel("Mạng: " + game.getBoard().getLives());
 		livesLabel.setForeground(Color.white);
 		livesLabel.setHorizontalAlignment(JLabel.CENTER);
-		
+
 		add(timeLabel);
 		add(pointsLabel);
 		add(livesLabel);
@@ -46,5 +49,4 @@ public class InfoPanel extends JPanel {
 	public void setLives(int t) {
 		livesLabel.setText("Mạng: " + t);
 	}
-	
 }

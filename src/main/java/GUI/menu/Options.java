@@ -17,7 +17,7 @@ public class Options extends JMenu implements ChangeListener {
 	Frame frame;
 	
 	public Options(Frame frame) {
-		super("Cài đặt");
+		super("Tùy chọn");
 		this.frame = frame;
 		
 		JMenuItem pause = new JMenuItem("Tạm dừng");
