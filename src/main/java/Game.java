@@ -31,8 +31,13 @@ public class Game extends Canvas {
 	public static final String TITLE = "Bomberman";
 
 	private static final int BOMB_RATE = 1;
+	private static final int MAX_BOMB_RATE = 8;
+
 	private static final int BOMB_RADIUS = 1;
+	private static final int MAX_BOMB_RADIUS = 8;
+
 	private static final double PLAYER_SPEED = 1.0;
+	private static final double MAX_SPEED = 2.5;
 	
 	public static final int TIME = 200;
 	public static final int POINTS = 0;
@@ -217,15 +222,21 @@ public class Game extends Canvas {
 	}
 	
 	public static void addPlayerSpeed(double i) {
-		playerSpeed += i;
+		if ((getPlayerSpeed() + i) <= MAX_SPEED) {
+			playerSpeed += i;
+		}
 	}
 	
 	public static void addBombRadius(int i) {
-		bombRadius += i;
+		if ((getBombRadius() + i) <= MAX_BOMB_RADIUS) {
+			bombRadius += i;
+		}
 	}
 	
 	public static void addBombRate(int i) {
-		bombRate += i;
+		if ((getBombRate() + i) <= MAX_BOMB_RATE) {
+			bombRate += i;
+		}
 	}
 	
 	public void resetScreenDelay() {

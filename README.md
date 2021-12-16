@@ -2,7 +2,7 @@
 
 Trong bài tập lớn này, nhiệm vụ của là viết một phiên bản Java mô phỏng lại trò chơi [Bomberman](https://www.youtube.com/watch?v=mKIOVwqgSXM) kinh điển của NES.
 
-<img src="res/demo.png" alt="drawing" width="400"/>
+<img src="res/Demo%20game.png" alt="drawing" width="400"/>
 
 ## Sinh viên thực hiện
 
@@ -46,24 +46,24 @@ Thông tin về các loại *Enemy* được liệt kê như dưới đây:
 
 ### Cơ chế game
 
-- Bomber sẽ bị giết khi va chạm với Enemy Flame. Khi Bomber chết 3 lần thì trò chơi kết thúc.
-- Enemy bị tiêu diệt khi chạm vào Flame.
+- Bomber sẽ bị giết khi va chạm với Enemy hoặc Flame của bom. Bomber sẽ có 3 mạng cho mỗi lần chơi, sau khi chết cả 3 mạng thì trò chơi kết thúc.
+- Enemy bị tiêu diệt khi chạm vào Flame của bom.
 
-- Khi Bomb nổ, một Flame trung tâm![](res/sprites/bomb_exploded.png) tại vị trí Bomb nổ và bốn Flame tại bốn vị trí ô đơn vị xung quanh vị trí của Bomb xuất hiện theo bốn hướng trên![](res/sprites/explosion_vertical.png), dưới![](res/sprites/explosion_vertical.png), trái![](res/sprites/explosion_horizontal.png), phải![](res/sprites/explosion_horizontal.png). Độ dài bốn Flame xung quanh ban đầu là 1 đơn vị, được tăng lên khi Bomber sử dụng các FlameItem.
+- Khi Bomb nổ, một Flame trung tâm![](res/sprites/bomb_exploded.png) tại vị trí Bomb nổ và bốn Flame tại bốn vị trí ô đơn vị xung quanh vị trí của Bomb sẽ xuất hiện theo bốn hướng trên![](res/sprites/explosion_vertical.png), dưới![](res/sprites/explosion_vertical.png), trái![](res/sprites/explosion_horizontal.png), phải![](res/sprites/explosion_horizontal.png). Độ dài bốn Flame xung quanh ban đầu là 1 đơn vị, được tăng lên khi Bomber sử dụng các FlameItem.
 - Khi Bomb chạm phải Flame sẽ nổ ngay lập tức mà không có thời gian chờ.
-- Các Flame sẽ xuất hiện khi Bomb phát nổ, chúng có thể xuyên qua các Enemy và sẽ bị chặn bởi Wall và Brick.
-- 2 Items Flame và Bomb sẽ được tăng không giới hạn khi ăn, còn với Speed Item sau khi tăng đến tốc độc tối đa sẽ không được tăng tốc độ nữa.
+- Các Flame sẽ xuất hiện khi Bomb phát nổ, chúng có thể xuyên qua các Enemy và sẽ bị chặn bởi Wall và phát hủy được các Brick ngay cạnh.
+- Các Flame, Bomb và Speed Item sẽ được sử dụng cho đến khi đạt đến hạn mức tối đa.
 
 ## Tóm tắt các tính năng trong bài tập lớn
 - Thiết kế cây thừa kế cho các đối tượng game.
-- Tự xây dựng bản đồ màn chơi từ tệp cấu hình (có mẫu tệp cấu hình, xem [tại đây](https://raw.githubusercontent.com/bqcuong/bomberman-starter/starter-2/res/levels/Level1.txt)).
+- Xây dựng bản đồ màn chơi từ tệp cấu hình.
 - Di chuyển Bomber theo sự điều khiển từ người chơi.
 - Tự động di chuyển các Enemy.
 - Xử lý va chạm cho các đối tượng Bomber, Enemy, Wall, Brick, Bomb.
 - Xử lý bom nổ.
 - Xử lý khi Bomber sử dụng các Item.
 - Xử lí khi qua Portal và kết thúc màn chơi.
-- Nâng cấp thuật toán tìm đường cho Enemy.
+- Nâng cấp thuật toán tránh bom cho Enemy.
 - Phát triển thêm các loại Enemy khác (tổng cộng 5 loại).
-- Tạo bảng điểm cao khi chơi game.
-- Xử lý hiệu ứng âm thanh (thêm music & sound effects).
+- Tạo menu dựa trên java Swing, bao gồm bảng top scores, hướng dẫn chơi, dừng/ tiếp tục game.
+- Xử lý hiệu ứng âm thanh (thêm sound effects).

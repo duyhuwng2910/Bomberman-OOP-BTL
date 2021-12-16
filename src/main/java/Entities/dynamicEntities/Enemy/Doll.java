@@ -10,7 +10,7 @@ import main.java.Graphics.Sprite;
  */
 public class Doll extends Enemy {
 	public Doll(int x, int y, Board board) {
-		super(x, y, board, Sprite.doll_dead, Game.getPlayerSpeed(), 200);
+		super(x, y, board, Sprite.doll_dead, Game.getPlayerSpeed() * 1.25, 200);
 		sprite = Sprite.doll_right1;
     ai = new AIAmateur(this.board.getBomber(), this, board);
 		direction = ai.calculateDirection();

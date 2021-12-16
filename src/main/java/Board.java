@@ -3,10 +3,7 @@ package main.java;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import main.java.Entities.Entity;
 import main.java.Entities.Notification;
@@ -48,7 +45,7 @@ public class Board implements Render {
 	protected int points = Game.POINTS;
 	protected int lives = Game.LIVES;
 
-	public String record;
+	public String record = "";
 
 	public Board(Game game, Keyboard input, Screen screen) {
 		this.game = game;
@@ -124,8 +121,11 @@ public class Board implements Render {
 	public void restartLevel() {
 		changeLevel(level.getLevel());
 	}
-	
+
+	@SuppressWarnings("static-access")
 	public void nextLevel() {
+		game.playerSpeed = 1.0;
+		game.bombRadius = 1;
 		changeLevel(level.getLevel() + 1);
 	}
 	
@@ -485,16 +485,19 @@ public class Board implements Render {
 			game.getTopScores().add(points);
 			Collections.sort(game.getTopScores());
 			record = "CHÚC MỪNG!! ĐIỂM CỦA BẠN ĐÁ PHÁ KỈ LỤC VÀ ON TOP ^^";
-    } else {
-      for (int i = 3; i >= 0; i--) {
-        if (points > game.getTopScores().get(i)) {
-          game.getTopScores().remove(0);
-          game.getTopScores().add(points);
-          Collections.sort(game.getTopScores());
-					record = "BẠN ĐÃ LỌT VÀO ĐƯỢC BẢNG VÀNG THÀNH TÍCH";
-          break;
-        }
-      }
+    	} else {
+      		for (int i = 3; i >= 0; i--) {
+        		if (points > game.getTopScores().get(i)) {
+          			game.getTopScores().remove(0);
+          			game.getTopScores().add(points);
+          			Collections.sort(game.getTopScores());
+				  	record = "BẠN ĐÃ LỌT VÀO ĐƯỢC BẢNG VÀNG THÀNH TÍCH";
+          			break;
+        		}
+      		}
+			  if (Objects.equals(record, "")) {
+				  record = " CHÚC BẠN MAY MẮN LẦN SAU";
+			  }
 		}
 	}
 }

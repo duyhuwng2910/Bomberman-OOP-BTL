@@ -10,7 +10,7 @@ import main.java.Sound.Sound;
 public class GameLauncher {
 	
 	public static void main(String[] args) throws GameException, UnsupportedAudioFileException, LineUnavailableException, IOException {
-		Sound.play("soundtrack");
+		//Sound.play("soundtrack");
 		Frame mainwindow = new Frame();
 	}
 }
